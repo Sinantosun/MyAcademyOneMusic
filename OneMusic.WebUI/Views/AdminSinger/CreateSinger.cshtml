@@ -1,0 +1,21 @@
+﻿@model Singer
+@{
+    ViewData["Title"] = "CreateSinger";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h1>Yeni Şarkıcı Ekleme Sayfası</h1>
+
+
+<form method="post">
+    @Html.Label("Görsel")
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <span class="text-danger" asp-validation-for="ImageUrl"></span>
+    <br />
+    @Html.Label("Şarkıcı Adı")
+    <input type="text" asp-for="Name" class="form-control" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+    <br />
+    <br />
+    <button class="btn btn-outline-primary">Kaydet</button>
+</form>

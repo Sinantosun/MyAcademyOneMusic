@@ -1,8 +1,10 @@
+using FluentValidation;
 using OneMusic.BusinessLayer.Abstract;
 using OneMusic.BusinessLayer.Concrete;
 using OneMusic.DataAccessLayer.Abstract;
 using OneMusic.DataAccessLayer.Concrete;
 using OneMusic.DataAccessLayer.Context;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,11 @@ builder.Services.AddScoped<IAlbumService, AlbumManager>();
 
 builder.Services.AddScoped<IBannerDal, EfBannerDal>();
 builder.Services.AddScoped<IBannerService, BannerManager>();
+
+builder.Services.AddScoped<ISingerDal, EFSingerDal>();
+builder.Services.AddScoped<ISingerService, SingerManager>();
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDbContext<OneMusicContext>();
 
