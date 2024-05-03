@@ -5,9 +5,10 @@
 }
 
 <h1>Yeni Şarkıcı Ekleme Sayfası</h1>
-
+<br />
 
 <form method="post">
+
     @Html.Label("Görsel")
     <input type="text" asp-for="ImageUrl" class="form-control" />
     <span class="text-danger" asp-validation-for="ImageUrl"></span>

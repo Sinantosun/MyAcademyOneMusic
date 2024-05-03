@@ -7,31 +7,21 @@
 <h3>Yeni Hakkımızda Oluşturma Sayfası</h3>
 <br />
 
-<div class="container-fluid">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-
-                <div class="card">
-                    <div class="card-body">
-                        <form method="post" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Başlık</label>
-                                @Html.TextBoxFor(x=>x.Title,new {@class="form-control"})
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1"  class="form-label">Görsel</label>
-                                @Html.TextBoxFor(x=>x.ImageUrl,new {@class="form-control"})
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Başlık</label>
-                              @Html.TextAreaFor(x=>x.Description,5,1,new{@class="form-control"})
-                            </div>
-                            <button type="submit" class="btn btn-primary">Kaydet</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Başlık</label>
+            @Html.TextBoxFor(x=>x.Title,new {@class="form-control"})
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Görsel</label>
+            @Html.TextBoxFor(x=>x.ImageUrl,new {@class="form-control"})
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Başlık</label>
+            @Html.TextAreaFor(x=>x.Description,5,1,new{@class="form-control"})
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </form>
 </div>
+             
