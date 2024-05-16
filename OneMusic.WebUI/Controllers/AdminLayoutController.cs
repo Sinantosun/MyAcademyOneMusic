@@ -12,5 +12,10 @@ namespace OneMusic.WebUI.Controllers
         {
             return View();
         }
+
+        public PartialViewResult NotificationPartial()
+        {
+            return PartialView();
+        }
     }
 }

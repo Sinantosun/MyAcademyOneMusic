@@ -23,12 +23,19 @@ namespace OneMusic.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "AdminAbout");
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "AdminAbout");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
+                }
             }
-            ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
+           
             return View();
         }
     }

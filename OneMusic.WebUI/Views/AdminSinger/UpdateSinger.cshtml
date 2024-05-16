@@ -1,4 +1,4 @@
-﻿@model Singer
+﻿@model OneMusic.BusinessLayer.Models.Singer.UpdateSingerModel
 @{
     ViewData["Title"] = "UpdateSinger";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -7,10 +7,12 @@
 <h1>Şarkıcı Güncelleme Sayfası</h1>
 <br />
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="SingerId" class="form-control" />
-    @Html.Label("Görsel")
-    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+    @Html.Label("Albüm Görsel")
+    <input type="file" asp-for="Image" class="form-control" />
+    <span class="text-danger" asp-validation-for="Image"></span>
     <br />
     @Html.Label("Şarkıcı Adı")
     <input type="text" asp-for="Name" class="form-control" />

@@ -30,7 +30,8 @@ builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<OneMusicContext>();
 
 
-builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter()); });
+builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter()); });
 
 
 builder.Services.ConfigureApplicationCookie(options => { options.LoginPath = "/Login/Index"; });
