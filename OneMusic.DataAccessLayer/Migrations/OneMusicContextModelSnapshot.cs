@@ -162,6 +162,9 @@ namespace OneMusic.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CoverImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -173,6 +176,8 @@ namespace OneMusic.DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AlbumId");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("SingerId");
 
@@ -471,11 +476,17 @@ namespace OneMusic.DataAccessLayer.Migrations
 
             modelBuilder.Entity("OneMusic.EntityLayer.Entities.Album", b =>
                 {
+                    b.HasOne("OneMusic.EntityLayer.Entities.AppUser", "AppUser")
+                        .WithMany("Albums")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("OneMusic.EntityLayer.Entities.Singer", "Singer")
                         .WithMany("Albums")
                         .HasForeignKey("SingerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Singer");
                 });
@@ -494,6 +505,11 @@ namespace OneMusic.DataAccessLayer.Migrations
             modelBuilder.Entity("OneMusic.EntityLayer.Entities.Album", b =>
                 {
                     b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("OneMusic.EntityLayer.Entities.AppUser", b =>
+                {
+                    b.Navigation("Albums");
                 });
 
             modelBuilder.Entity("OneMusic.EntityLayer.Entities.Singer", b =>

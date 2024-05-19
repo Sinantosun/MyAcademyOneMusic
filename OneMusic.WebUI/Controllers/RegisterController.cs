@@ -36,6 +36,7 @@ namespace OneMusic.WebUI.Controllers
             {
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(NewUser, "Visitor");
                     return RedirectToAction("Index", "Login");
                 }
                 foreach (var item in result.Errors)

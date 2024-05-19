@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using OneMusic.BusinessLayer.Abstract;
 using OneMusic.BusinessLayer.Concrete;
@@ -7,11 +8,12 @@ using OneMusic.DataAccessLayer.Abstract;
 using OneMusic.DataAccessLayer.Concrete;
 using OneMusic.DataAccessLayer.Context;
 using OneMusic.EntityLayer.Entities;
+using OneMusic.WebUI.DAL;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
@@ -25,16 +27,17 @@ builder.Services.AddScoped<IBannerService, BannerManager>();
 builder.Services.AddScoped<ISingerDal, EFSingerDal>();
 builder.Services.AddScoped<ISingerService, SingerManager>();
 
+builder.Services.AddScoped<ISongDal, EFSongDal>();
+builder.Services.AddScoped<ISongService, SongManager>();
+
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDbContext<OneMusicContext>();
 
 
 builder.Services.AddControllersWithViews();
-//builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter()); });
-
-
-builder.Services.ConfigureApplicationCookie(options => { options.LoginPath = "/Login/Index"; });
+builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter());  });
+builder.Services.ConfigureApplicationCookie(options => { options.LoginPath = "/Login/Index"; options.AccessDeniedPath = "/ErrorPages/Page403"; options.Cookie.Name = Guid.NewGuid().ToString(); options.ExpireTimeSpan = TimeSpan.FromMinutes(1); options.SlidingExpiration = true; options.LogoutPath = "/Login/LogOut/"; });
 var app = builder.Build();
 
 
@@ -46,15 +49,23 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.UseStatusCodePagesWithReExecute("/ErrorPages/Page404", "?code{0}");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
 
 app.Run();

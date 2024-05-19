@@ -9,5 +9,6 @@ namespace OneMusic.DataAccessLayer.Abstract
 {
     public interface ISongDal:IGenericDal<Song>
     {
+        List<Song> getRandomSingerWithRelationShip();
     }
 }

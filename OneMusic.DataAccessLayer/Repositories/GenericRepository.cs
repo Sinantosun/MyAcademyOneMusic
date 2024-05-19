@@ -1,4 +1,5 @@
-﻿using OneMusic.DataAccessLayer.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using OneMusic.DataAccessLayer.Abstract;
 using OneMusic.DataAccessLayer.Context;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace OneMusic.DataAccessLayer.Repositories
 
         public List<T> GetList()
         {
-            return _context.Set<T>().ToList();
+            return _context.Set<T>().AsNoTracking().ToList();
         }
 
         public void Update(T entity)

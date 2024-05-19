@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using OneMusic.BusinessLayer.Abstract;
@@ -9,6 +10,7 @@ using OneMusic.WebUI.ImageSettings;
 
 namespace OneMusic.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminSingerController : Controller
     {
         private readonly ISingerService _singerService;

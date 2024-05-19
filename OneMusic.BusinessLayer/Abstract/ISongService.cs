@@ -10,5 +10,6 @@ namespace OneMusic.BusinessLayer.Abstract
 {
     public interface ISongService : IGenericService<Song>
     {
+        List<Song> TgetRandomSingerWithRelationShip();
     }
 }

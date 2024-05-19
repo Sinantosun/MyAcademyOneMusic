@@ -1,0 +1,60 @@
+﻿@model ResultUserViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<form method="post" enctype="multipart/form-data">
+    <div style="justify-content:center; justify-content:space-around;  align-items:center; display:flex">
+        <span style="font-weight:bold">Hoş Geldiniz, <span style="text-transform:capitalize"> @Model.Name @Model.Surname</span></span>
+        <br />
+        <br />
+        <img src="@Model.ImageURL" class="shadow-lg p-3 mb-5 bg-white rounded" style="border-radius:50%;  width:150px; height:150px;" /><br />
+        <br />
+    </div>
+
+    @Html.Label("Adınız")
+    <input type="hidden" asp-for="Id" class="form-control" />
+    <input type="text" asp-for="Name" class="form-control" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+    <br />
+    @Html.Label("Soyadınız")
+    <input type="text" asp-for="Surname" class="form-control" />
+    <span class="text-danger" asp-validation-for="Surname"></span>
+    <br />
+    @Html.Label("Kullanıcı Adınız")
+    <input type="text" asp-for="UserName" class="form-control" />
+    <span class="text-danger" asp-validation-for="UserName"></span>
+    <br />
+    @Html.Label("Email Adresiniz")
+    <input type="text" asp-for="Email" class="form-control" />
+    <span class="text-danger" asp-validation-for="Email"></span>
+    <br />
+    @Html.Label("Telefon Numaranız")
+    <input type="text" asp-for="PhoneNumber" class="form-control" />
+    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+    <br />
+    @Html.Label("Şifreniz")
+    <input type="password" asp-for="Password" class="form-control" />
+    <span class="text-danger" asp-validation-for="Password"></span>
+    <br />
+    @Html.Label("Şifreniz Yeniden")
+    <input type="password" asp-for="ConfirmPassword" class="form-control" />
+    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    <br />
+    @Html.Label("Görsel")
+    <input type="file" asp-for="CoverPhoto" class="form-control" />
+    <span class="text-danger" asp-validation-for="CoverPhoto"></span>
+    <br />
+
+    @if (ViewBag.ResultPassword != null)
+    {
+        <div class="alert alert-danger">
+            @Html.Raw(ViewBag.ResultPassword)
+        </div>
+    }
+    <button class="btn btn-outline-primary">Kaydet</button>
+</form>
+
+

@@ -28,6 +28,11 @@ namespace OneMusic.BusinessLayer.Concrete
             _albumDal.Delete(id);
         }
 
+        public List<Album> TgetAlbumByArtist(int id)
+        {
+            return _albumDal.getAlbumByArtist(id);
+        }
+
         public List<Album> TgetAlbumListWithSinger()
         {
             return _albumDal.getAlbumListWithSinger();

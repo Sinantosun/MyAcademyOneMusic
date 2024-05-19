@@ -1,0 +1,74 @@
+﻿@using OneMusic.EntityLayer.Entities;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<Album>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Default/Views/_DefaultLayout/Index.cshtml";
+}
+
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(/one-music-gh-pages/img/bg-img/breadcumb3.jpg);">
+    <div class="bradcumbContent">
+        <h3 class="mt-5">Albümler</h3>
+    </div>
+</section>
+<section class="album-catagory section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="browse-by-catagories catagory-menu d-flex flex-wrap align-items-center mb-70">
+                    <a href="#" data-filter="*">Hepsini Gör</a>
+                    <a href="#" data-filter=".a" class="active">A</a>
+                    <a href="#" data-filter=".b">B</a>
+                    <a href="#" data-filter=".c">C</a>
+                    <a href="#" data-filter=".d">D</a>
+                    <a href="#" data-filter=".e">E</a>
+                    <a href="#" data-filter=".f">F</a>
+                    <a href="#" data-filter=".g">G</a>
+                    <a href="#" data-filter=".h">H</a>
+                    <a href="#" data-filter=".i">I</a>
+                    <a href="#" data-filter=".j">J</a>
+                    <a href="#" data-filter=".k">K</a>
+                    <a href="#" data-filter=".l">L</a>
+                    <a href="#" data-filter=".m">M</a>
+                    <a href="#" data-filter=".n">N</a>
+                    <a href="#" data-filter=".o">O</a>
+                    <a href="#" data-filter=".p">P</a>
+                    <a href="#" data-filter=".q">Q</a>
+                    <a href="#" data-filter=".r">R</a>
+                    <a href="#" data-filter=".s">S</a>
+                    <a href="#" data-filter=".t">T</a>
+                    <a href="#" data-filter=".u">U</a>
+                    <a href="#" data-filter=".v">V</a>
+                    <a href="#" data-filter=".w">W</a>
+                    <a href="#" data-filter=".x">X</a>
+                    <a href="#" data-filter=".y">Y</a>
+                    <a href="#" data-filter=".z">Z</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row oneMusic-albums">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item @item.AlbumName.Substring(0,1).ToLower()">
+                    <div class="single-album">
+                        <img src="@item.CoverImage" alt="">
+                        <div class="album-info">
+                            <a href="#">
+                                <h5>@item.AlbumName</h5>
+                            </a>
+                            <p>@item.SingerId.ToString()</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div style="justify-content:center; align-items:center; display:flex;">
+            @Html.PagedListPager((IPagedList)Model, pageNumber =>  Url.Action("Index", new { area ="Default", pageNumber }), new PagedListRenderOptions { LiElementClasses = new List<string> { "page-link" } })
+        </div>
+    </div>
+</section>
+@await Component.InvokeAsync("_DefaultSingerComponentPartial")

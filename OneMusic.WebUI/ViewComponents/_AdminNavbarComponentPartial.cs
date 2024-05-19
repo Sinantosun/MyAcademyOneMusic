@@ -15,9 +15,10 @@ namespace OneMusic.WebUI.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //var value = await _userManager.FindByNameAsync(User.Identity.Name);
+            var value = await _userManager.FindByNameAsync(User.Identity.Name);
             
-            //ViewBag.userName = value.Name + " " + value.Surname;
+            ViewBag.userName = value.Name + " " + value.Surname;
+            ViewBag.ImageURL = value.ImageURL;
             return View();
         }
     }

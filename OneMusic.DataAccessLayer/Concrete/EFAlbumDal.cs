@@ -4,7 +4,6 @@ using OneMusic.DataAccessLayer.Context;
 using OneMusic.DataAccessLayer.Repositories;
 using OneMusic.EntityLayer.Entities;
 
-
 namespace OneMusic.DataAccessLayer.Concrete
 {
     public class EFAlbumDal : GenericRepository<Album>, IAlbumDal
@@ -14,10 +13,15 @@ namespace OneMusic.DataAccessLayer.Concrete
         {
             _context = context;
         }
-        
+
+        public List<Album> getAlbumByArtist(int id)
+        {
+            return _context.Albums.Include(y => y.AppUser).Where(x => x.AppUserId == id).ToList();
+        }
+
         public List<Album> getAlbumListWithSinger()
         {
-            
+
             return _context.Albums.Include(x => x.Singer).ToList();
         }
     }
