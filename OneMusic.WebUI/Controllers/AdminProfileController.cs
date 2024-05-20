@@ -31,9 +31,18 @@ namespace OneMusic.WebUI.Controllers
                 UserName = values.UserName,
                 ImageURL = values.ImageURL,
                 Id = values.Id,
+                IsEmailConfirmed = values.EmailConfirmed,
+                IsPhoneConfirmed = values.PhoneNumberConfirmed,
+
             };
             return resultUserViewModel;
 
+        }
+
+
+        public async Task<IActionResult> ConfirmEmail(int id)
+        {
+            return View();
         }
 
 
@@ -71,7 +80,7 @@ namespace OneMusic.WebUI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Password","Girdiğiniz şifreler eşleşmiyor.");
+                    ModelState.AddModelError("Password", "Girdiğiniz şifreler eşleşmiyor.");
                     return View(await LoadUserData());
                 }
             }

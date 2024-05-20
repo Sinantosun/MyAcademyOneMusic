@@ -14,6 +14,9 @@ namespace OneMusic.WebUI.Models.UserModels
         public string ConfirmPassword { get; set; }
         public string PhoneNumber { get; set; }
 
+        public bool IsEmailConfirmed { get; set; }  
+        public bool IsPhoneConfirmed { get; set; }
+
         public IFormFile CoverPhoto { get; set; }
 
     }
