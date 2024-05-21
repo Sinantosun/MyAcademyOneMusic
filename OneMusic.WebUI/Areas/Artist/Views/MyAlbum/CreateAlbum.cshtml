@@ -1,7 +1,7 @@
-﻿@model CreateAlbumViewModel
+﻿@model Album
 @{
     ViewData["Title"] = "CreateAlbum";
-    Layout = "~/Views/AdminLayout/Index.cshtml";
+    Layout = "~/Areas/Artist/Views/ArtistLayout/Index.cshtml";
 }
 
 <h1>Yeni Albüm Ekleme Sayfası</h1>
@@ -14,16 +14,12 @@
     <span class="text-danger" asp-validation-for="AlbumName"></span>
     <br />
     @Html.Label("Albüm Görsel")
-    <input type="file" asp-for="Image" class="form-control" />
-    <span class="text-danger" asp-validation-for="Image"></span>
+    <input type="text" asp-for="CoverImage" class="form-control" />
+    <span class="text-danger" asp-validation-for="CoverImage"></span>
     <br />
     @Html.Label("Fiyat")
     <input type="text" asp-for="Price" class="form-control" />
     <span class="text-danger" asp-validation-for="Price"></span>
-    <br />
-    @Html.Label("Şarkıcı Seçiniz")
-    @Html.DropDownListFor(x=>x.AppUserId,(List<SelectListItem>)ViewBag.SingerList,"Seçiniz",new {@class="form-control"})
-    <span class="text-danger" asp-validation-for="AppUserId"></span>
     <br />
     <br />
     <button class="btn btn-outline-primary">Kaydet</button>

@@ -9,8 +9,7 @@ namespace OneMusic.DataAccessLayer.Abstract
 {
     public interface IAlbumDal:IGenericDal<Album>
     {
-        List<Album> getAlbumListWithSinger();
-
         List<Album> getAlbumByArtist(int id);
+
     }
 }

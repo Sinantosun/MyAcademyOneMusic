@@ -27,7 +27,7 @@ namespace OneMusic.WebUI.Controllers
 
         public IActionResult Index(int pageNumber = 1)
         {
-            var values = _albumService.TgetAlbumListWithSinger().ToPagedList(pageNumber,5);
+            var values = _albumService.TGetList().ToPagedList(pageNumber,5);
             return View(values);
         }
         public IActionResult DeleteAlbum(int id)
@@ -74,7 +74,6 @@ namespace OneMusic.WebUI.Controllers
                         AlbumName = album.AlbumName,
                         CoverImage = imageName,
                         Price = album.Price,
-                        SingerId = album.SingerId,
                     };
                     _albumService.TCreate(newAlbum);
                     TempData["Result"] = "Ekleme işlemi başarılı";
@@ -116,7 +115,6 @@ namespace OneMusic.WebUI.Controllers
             {
                 AlbumName=values.AlbumName,
                 Price=values.Price,
-                SingerId=values.SingerId,
                 AlbumId=values.AlbumId,
                 
             };
@@ -129,7 +127,6 @@ namespace OneMusic.WebUI.Controllers
 
             var value = _albumService.TGetById(album.AlbumId);
             value.AlbumName = album.AlbumName;
-            value.SingerId = album.SingerId;
             value.Price = album.Price;
             if (album.Image != null)
             {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using OneMusic.BusinessLayer.Abstract;
 using OneMusic.EntityLayer.Entities;
 using OneMusic.WebUI.ImageSettings;
 using OneMusic.WebUI.Models.UserModels;
@@ -12,10 +13,12 @@ namespace OneMusic.WebUI.Controllers
     public class AdminProfileController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMailService _mailService;
 
-        public AdminProfileController(UserManager<AppUser> userManager)
+        public AdminProfileController(UserManager<AppUser> userManager, IMailService mailService)
         {
             _userManager = userManager;
+            _mailService = mailService;
         }
 
 
@@ -39,11 +42,15 @@ namespace OneMusic.WebUI.Controllers
 
         }
 
-
-        public async Task<IActionResult> ConfirmEmail(int id)
+        public async Task<IActionResult> SendMailForVerifyMail(int id)
         {
-            return View();
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            _mailService.sendMail(user.Email,"Mail Doğrulama","mail doğrulama kodunuz. 15080");
+            TempData["Result"] = "Aktivasyon Kodu Gönderildi";
+            TempData["icon"] = "success";
+            return RedirectToAction("Index");
         }
+
 
 
         [HttpGet]

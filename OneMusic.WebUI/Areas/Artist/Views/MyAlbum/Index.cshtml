@@ -14,6 +14,7 @@
         <td>Resim</td>
         <td>Albüm Adı</td>
         <td>Fiyat</td>
+        <td colspan="2">İşlemler</td>
     </tr>
     @foreach (var item in Model)
     {
@@ -23,8 +24,37 @@
             <td><img src="@item.CoverImage" style="height:75px; width:75px; " /></td>
             <td>@item.AlbumName</td>
             <td>@item.Price.ToString("N0") ₺</td>
+            <td><button onclick="deleteMyAlbum(@item.AlbumId)" class="btn btn-outline-danger">Sil</button></td>
+            <td><a asp-action="UpdateAlbum" asp-route-id="@item.AlbumId" class="btn btn-outline-success">Güncelle</a></td>
         </tr>
     }
 </table>
+<a asp-action="CreateAlbum" class="btn btn-outline-success">Yeni Albüm Ekle</a>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function deleteMyAlbum(id) {
+        Swal.fire({
+            title: "Kayıt Silme Onayı",
+            html: "Bu kaydı silmek istediğinize emin misiniz? <br><b> bu işlem geri alanımaz.</b>",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sil",
+            cancelButtonText: "Vazgeç"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Artist/MyAlbum/DeleteAlbum/" + id;
+            }
+            else {
+                Toast.fire({
+                    icon: "warning",
+                    title: "Kayıt Silme işlemi iptal edildi."
+                });
+            }
+        });
+    }
+</script>
 
