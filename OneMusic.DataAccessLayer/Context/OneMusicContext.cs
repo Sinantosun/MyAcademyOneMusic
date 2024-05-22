@@ -22,7 +22,6 @@ namespace OneMusic.DataAccessLayer.Context
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Singer> Singers { get; set; }
         public DbSet<Song> Songs { get; set; }
 
 

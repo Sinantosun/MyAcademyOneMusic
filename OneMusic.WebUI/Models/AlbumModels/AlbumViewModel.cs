@@ -9,9 +9,7 @@ namespace OneMusic.WebUI.Models.AlbumModels
         public string CoverImage { get; set; }
         public decimal Price { get; set; }
 
-        public int SingerId { get; set; }
 
-        public Singer Singer { get; set; }
 
         public List<Song> Songs { get; set; }
 

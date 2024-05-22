@@ -13,7 +13,12 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<AppUser, AppRole>(opts =>
+{
+    opts.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => { opts.TokenLifespan = TimeSpan.FromMilliseconds(60); });
 
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
@@ -24,8 +29,6 @@ builder.Services.AddScoped<IAlbumService, AlbumManager>();
 builder.Services.AddScoped<IBannerDal, EfBannerDal>();
 builder.Services.AddScoped<IBannerService, BannerManager>();
 
-builder.Services.AddScoped<ISingerDal, EFSingerDal>();
-builder.Services.AddScoped<ISingerService, SingerManager>();
 
 builder.Services.AddScoped<ISongDal, EFSongDal>();
 builder.Services.AddScoped<ISongService, SongManager>();
@@ -39,7 +42,7 @@ builder.Services.AddDbContext<OneMusicContext>();
 
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter());  });
+builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter()); });
 builder.Services.ConfigureApplicationCookie(options => { options.LoginPath = "/Login/Index"; options.AccessDeniedPath = "/ErrorPages/Page403"; options.Cookie.Name = Guid.NewGuid().ToString(); options.ExpireTimeSpan = TimeSpan.FromMinutes(1); options.SlidingExpiration = true; options.LogoutPath = "/Login/LogOut/"; });
 var app = builder.Build();
 

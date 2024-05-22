@@ -53,7 +53,6 @@
     <Folder Include="wwwroot\Images\Albums\" />
     <Folder Include="wwwroot\Images\Banners\" />
     <Folder Include="wwwroot\Images\Artists\" />
-    <Folder Include="wwwroot\Images\Singers\" />
     <Folder Include="wwwroot\Images\Users\Admins\" />
   </ItemGroup>
 

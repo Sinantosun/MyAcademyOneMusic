@@ -4,6 +4,33 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
+@if (TempData["userEmailConfirmedTimer"] != null)
+{
+    <script>
+        var timer = 60;
+        function startTimer() {
+
+            timer--;
+            document.getElementById("mailtimer").innerText = timer;
+            if (timer < 0) {
+                window.clearInterval(deger);
+                Swal.fire({
+                    title: "Aktivasyon kodu süresi doldu!",
+                    text: "Lütfen yeniden deneyin.",
+                    icon: "info"
+                });
+
+            }
+        }
+        var deger = window.setInterval('startTimer()', 1000);
+    </script>
+
+    <div class="alert alert-info" style="display:flex; justify-content:center; align-items:center">
+        Mail onayı için kalan süre :&nbsp; <b><span id="mailtimer"></span></b>
+    </div>
+
+}
+
 
 <form method="post" enctype="multipart/form-data">
     <div style="justify-content:center; justify-content:space-around;  align-items:center; display:flex">

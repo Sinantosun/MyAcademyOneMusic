@@ -18,11 +18,9 @@ namespace OneMusic.WebUI.Controllers
     public class AdminAlbumController : Controller
     {
         private readonly IAlbumService _albumService;
-        private readonly ISingerService _singerService;
-        public AdminAlbumController(IAlbumService albumService, ISingerService singerService)
+        public AdminAlbumController(IAlbumService albumService)
         {
             _albumService = albumService;
-            _singerService = singerService;
         }
 
         public IActionResult Index(int pageNumber = 1)
@@ -39,23 +37,23 @@ namespace OneMusic.WebUI.Controllers
             ImageSetting.DeleteImage(value.CoverImage);
             return RedirectToAction("Index");
         }
-        void loadSingerList()
-        {
-            var _singerList = _singerService.TGetList();
-            List<SelectListItem> list = (from x in _singerList
-                                         select new SelectListItem
-                                         {
-                                             Text = x.Name,
-                                             Value = x.SingerId.ToString(),
-                                         }).ToList();
-            ViewBag.SingerList = list;
-        }
+        //void loadSingerList()
+        //{
+        //    var _singerList = _singerService.TGetList();
+        //    List<SelectListItem> list = (from x in _singerList
+        //                                 select new SelectListItem
+        //                                 {
+        //                                     Text = x.Name,
+        //                                     Value = x.SingerId.ToString(),
+        //                                 }).ToList();
+        //    ViewBag.SingerList = list;
+        //}
 
 
         [HttpGet]
         public IActionResult CreateAlbum()
         {
-            loadSingerList();
+       
             return View();
         }
         [HttpPost]
@@ -100,7 +98,7 @@ namespace OneMusic.WebUI.Controllers
 
             TempData["Result"] = "Hata! kayıt eklenemedi";
             TempData["icon"] = "warning";
-            loadSingerList();
+
             return View();
 
 
@@ -118,7 +116,7 @@ namespace OneMusic.WebUI.Controllers
                 AlbumId=values.AlbumId,
                 
             };
-            loadSingerList();
+
             return View(updateAlbumViewModel);
         }
         [HttpPost]

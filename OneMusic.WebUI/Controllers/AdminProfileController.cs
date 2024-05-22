@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using OneMusic.BusinessLayer.Abstract;
 using OneMusic.EntityLayer.Entities;
 using OneMusic.WebUI.ImageSettings;
 using OneMusic.WebUI.Models.UserModels;
+using System.Web;
 
 namespace OneMusic.WebUI.Controllers
 {
@@ -44,10 +46,12 @@ namespace OneMusic.WebUI.Controllers
 
         public async Task<IActionResult> SendMailForVerifyMail(int id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            _mailService.sendMail(user.Email,"Mail Doğrulama","mail doğrulama kodunuz. 15080");
-            TempData["Result"] = "Aktivasyon Kodu Gönderildi";
+            AppUser user = await _userManager.FindByIdAsync(id.ToString());
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            _mailService.sendMail(user.Email, "Mail Doğrulama", $"Merhaba,<br><br>Mailinizi aşağıdaki url üzerinden doğrulayabilirsiniz. <br/ ><a href=\"https://localhost:7238{Url.Action("EmailConfirmed", "Login", new { id = user.Id, token = HttpUtility.UrlEncode(token) })}\">Mailimi Doğrula</a><br><br> One Music");
+            TempData["Result"] = "Aktivasyon Kodu Gönderildi aktivasyon süresi 1 dakikadır";
             TempData["icon"] = "success";
+            TempData["userEmailConfirmedTimer"] = "success";
             return RedirectToAction("Index");
         }
 

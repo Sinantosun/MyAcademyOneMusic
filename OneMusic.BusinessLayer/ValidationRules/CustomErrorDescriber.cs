@@ -29,5 +29,13 @@ namespace OneMusic.BusinessLayer.ValidationRules
         {
             return new IdentityError { Code = "PasswordRequiresNonAlphanumeric", Description = "Şifre en az bir özel karakter içermelidir." };
         }
+        public override IdentityError DuplicateEmail(string email)
+        {
+            return new IdentityError { Code = "DuplicateEmail", Description = "Seçtiğiniz e posta kullanılıyor." };
+        }
+        public override IdentityError DuplicateUserName(string userName)
+        {
+            return new IdentityError { Code = "DuplicateUserName", Description = "Seçtiğiniz kullanıcı adı kullanılıyor." };
+        }
     }
 }
