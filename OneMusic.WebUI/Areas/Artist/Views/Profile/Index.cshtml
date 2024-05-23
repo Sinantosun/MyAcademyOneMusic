@@ -84,11 +84,11 @@
     <span class="text-danger" asp-validation-for="PasswordConfirm"></span>
     <br />
     @Html.Label("Görsel")
-    <input type="file" asp-for="ImageFile" class="form-control" />
+    <input type="file" asp-for="ImageFile" id="fileName" class="form-control" />
     <span class="text-danger" asp-validation-for="ImageFile"></span>
     <br />
 
-     
+
 
 
     @if (ViewBag.ResultPassword != null)
@@ -99,7 +99,6 @@
     }
     <button class="btn btn-outline-primary">Güncelle</button>
 </form>
-
 
 
 

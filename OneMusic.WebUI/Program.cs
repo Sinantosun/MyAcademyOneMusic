@@ -33,6 +33,11 @@ builder.Services.AddScoped<IBannerService, BannerManager>();
 builder.Services.AddScoped<ISongDal, EFSongDal>();
 builder.Services.AddScoped<ISongService, SongManager>();
 
+builder.Services.AddScoped<IMessageService, MessageManager>();
+builder.Services.AddScoped<IMessageDal, EFMessageDal>();
+
+
+
 builder.Services.AddScoped<IMailService, MailManager>();
 
 

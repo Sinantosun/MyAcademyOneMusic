@@ -28,7 +28,7 @@ namespace OneMusic.BusinessLayer.ValidationRules
         private bool CheckExtension(string fileName)
         {
             var ex = Path.GetExtension(fileName);
-            if (ex == ".png" || ex == "jpg" || ex == ".jpeg")
+            if (ex == ".png" || ex == ".jpg" || ex == ".jpeg")
             {
                 return true;
             }

@@ -16,7 +16,6 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
         {
             _albumService = albumService;
         }
-        [Route("Index")]
         public IActionResult Index(int pageNumber = 1)
         {
 

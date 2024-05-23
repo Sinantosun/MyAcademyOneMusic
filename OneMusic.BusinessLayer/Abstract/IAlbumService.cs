@@ -10,6 +10,7 @@ namespace OneMusic.BusinessLayer.Abstract
     public interface IAlbumService : IGenericService<Album>
     {
         List<Album> TgetAlbumByArtist(int id);
+        List<Album> TgetAlbumListWithArtist();
 
     }
 }
