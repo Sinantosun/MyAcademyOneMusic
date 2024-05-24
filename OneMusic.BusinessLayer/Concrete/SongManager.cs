@@ -18,24 +18,29 @@ namespace OneMusic.BusinessLayer.Concrete
             _songDal = songDal;
         }
 
+        public List<Song> TArtistSongsWithAlbum(int id)
+        {
+            return _songDal.ArtistSongsWithAlbum(id);
+        }
+
         public void TCreate(Song entity)
         {
-            throw new NotImplementedException();
+            _songDal.Create(entity);
         }
 
         public void TDelete(int id)
         {
-            throw new NotImplementedException();
+            _songDal.Delete(id);
         }
 
         public Song TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _songDal.GetById(id);
         }
 
         public List<Song> TGetList()
         {
-            throw new NotImplementedException();
+            return _songDal.GetList();
         }
 
         public List<Song> TgetRandomSingerWithRelationShip()
@@ -43,9 +48,14 @@ namespace OneMusic.BusinessLayer.Concrete
             return _songDal.getRandomSingerWithRelationShip();
         }
 
+        public int TSongCount(int id)
+        {
+            return _songDal.SongCount(id);
+        }
+
         public void TUpdate(Song entity)
         {
-            throw new NotImplementedException();
+            _songDal.Update(entity);
         }
     }
 }

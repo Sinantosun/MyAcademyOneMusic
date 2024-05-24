@@ -169,8 +169,15 @@ namespace OneMusic.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsVerify")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("VerifyDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AlbumId");
 
@@ -397,6 +404,29 @@ namespace OneMusic.DataAccessLayer.Migrations
                     b.ToTable("Songs");
                 });
 
+            modelBuilder.Entity("OneMusic.EntityLayer.Entities.SongsListenDetails", b =>
+                {
+                    b.Property<int>("SongsListenDetailsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SongsListenDetailsID"));
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SongsListenDetailsID");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("SongId");
+
+                    b.ToTable("SongsListenDetails");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("OneMusic.EntityLayer.Entities.AppRole", null)
@@ -468,6 +498,25 @@ namespace OneMusic.DataAccessLayer.Migrations
                     b.Navigation("Album");
                 });
 
+            modelBuilder.Entity("OneMusic.EntityLayer.Entities.SongsListenDetails", b =>
+                {
+                    b.HasOne("OneMusic.EntityLayer.Entities.AppUser", "AppUser")
+                        .WithMany("SongsListenDetails")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OneMusic.EntityLayer.Entities.Song", "Song")
+                        .WithMany("SongsListenDetails")
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Song");
+                });
+
             modelBuilder.Entity("OneMusic.EntityLayer.Entities.Album", b =>
                 {
                     b.Navigation("Songs");
@@ -476,6 +525,13 @@ namespace OneMusic.DataAccessLayer.Migrations
             modelBuilder.Entity("OneMusic.EntityLayer.Entities.AppUser", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("SongsListenDetails");
+                });
+
+            modelBuilder.Entity("OneMusic.EntityLayer.Entities.Song", b =>
+                {
+                    b.Navigation("SongsListenDetails");
                 });
 #pragma warning restore 612, 618
         }

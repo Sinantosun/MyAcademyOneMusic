@@ -13,6 +13,9 @@ namespace OneMusic.EntityLayer.Entities
         public string CoverImage { get; set; }
         public decimal Price { get; set; }
 
+        public bool IsVerify { get; set; }
+        public string VerifyDescription { get; set; }
+
         public int? AppUserId { get; set; }
 
         public AppUser AppUser { get; set; }

@@ -13,5 +13,7 @@ namespace OneMusic.EntityLayer.Entities
         public string SongUrl { get; set; }
         public int AlbumId { get; set; }
         public Album Album { get; set; }
+
+        public List<SongsListenDetails> SongsListenDetails { get; set; }
     }
 }

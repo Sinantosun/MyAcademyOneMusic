@@ -18,6 +18,16 @@ namespace OneMusic.BusinessLayer.Concrete
             _albumDal = albumDal;
         }
 
+        public int TAlbumCount(int id)
+        {
+           return _albumDal.AlbumCount(id);
+        }
+
+        public int TAlbumCountByWaiting(int id)
+        {
+            return _albumDal.AlbumCountByWaiting(id);
+        }
+
         public void TCreate(Album entity)
         {
             _albumDal.Create(entity);
@@ -26,6 +36,11 @@ namespace OneMusic.BusinessLayer.Concrete
         public void TDelete(int id)
         {
             _albumDal.Delete(id);
+        }
+
+        public string TExpensiveAlbumName(int id)
+        {
+            return _albumDal.ExpensiveAlbumName(id);
         }
 
         public List<Album> TgetAlbumByArtist(int id)

@@ -13,15 +13,27 @@ namespace OneMusic.DataAccessLayer.Concrete
 {
     public class EFSongDal : GenericRepository<Song>, ISongDal
     {
+        private readonly OneMusicContext _context;
         public EFSongDal(OneMusicContext context) : base(context)
         {
+            _context = context;
+        }
+
+        public List<Song> ArtistSongsWithAlbum(int id)
+        {
+            return _context.Songs.Include(x => x.Album).Where(x => x.Album.AppUserId == id).ToList();
         }
 
         public List<Song> getRandomSingerWithRelationShip()
         {
-            var context = new OneMusicContext();
-            var result = context.Songs.OrderBy(x => Guid.NewGuid()).Include(x => x.Album).Take(5).ToList();
+
+            var result = _context.Songs.OrderBy(x => Guid.NewGuid()).Include(x => x.Album).Take(5).ToList();
             return result;
+        }
+
+        public int SongCount(int id)
+        {
+            return _context.Songs.Where(x => x.Album.AppUserId == id && x.Album.IsVerify == true && x.Album.VerifyDescription == "Onaylandı").Count();
         }
     }
 }

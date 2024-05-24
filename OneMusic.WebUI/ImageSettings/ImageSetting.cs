@@ -24,5 +24,17 @@ namespace OneMusic.WebUI.ImageSettings
                 System.IO.File.Delete(location);
             }
         }
+
+        public static string CreateSong(IFormFile formFile)
+        {
+            var ex = Path.GetExtension(formFile.FileName);
+            var songname = Guid.NewGuid() + ex;
+            var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Songs/", songname);
+            var stream = new FileStream(location, FileMode.Create);
+            formFile.CopyTo(stream);
+            stream.Close();
+            stream.Dispose();
+            return "/Songs/" + songname;
+        }
     }
 }

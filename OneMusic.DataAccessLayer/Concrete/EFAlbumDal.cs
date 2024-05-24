@@ -14,9 +14,24 @@ namespace OneMusic.DataAccessLayer.Concrete
             _context = context;
         }
 
+        public int AlbumCount(int id)
+        {
+            return _context.Albums.Where(x => x.IsVerify == true && x.AppUserId == id).Count();
+        }
+
+        public int AlbumCountByWaiting(int id)
+        {
+            return _context.Albums.Where(x => x.VerifyDescription == "Onay Aşamasında" && x.AppUserId == id).Count();
+        }
+
+        public string ExpensiveAlbumName(int id)
+        {
+            return _context.Albums.Where(x => x.AppUserId == id && x.Price == _context.Albums.Max(y => y.Price)).Select(t => t.AlbumName).FirstOrDefault();
+        }
+
         public List<Album> getAlbumByArtist(int id)
         {
-            return _context.Albums.Include(y => y.AppUser).Where(x => x.AppUserId == id).ToList();
+            return _context.Albums.Include(y => y.AppUser).Where(x => x.AppUserId == id && x.IsVerify == true).ToList();
         }
 
         public List<Album> getAlbumListWithArtist()

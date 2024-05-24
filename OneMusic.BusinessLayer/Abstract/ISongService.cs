@@ -11,5 +11,8 @@ namespace OneMusic.BusinessLayer.Abstract
     public interface ISongService : IGenericService<Song>
     {
         List<Song> TgetRandomSingerWithRelationShip();
+        int TSongCount(int id);
+        List<Song> TArtistSongsWithAlbum(int id);
     }
+
 }

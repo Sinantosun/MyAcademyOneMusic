@@ -36,7 +36,8 @@ builder.Services.AddScoped<ISongService, SongManager>();
 builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddScoped<IMessageDal, EFMessageDal>();
 
-
+builder.Services.AddScoped<ISongsListenDetailsService, SongsListenDetailsManager>();
+builder.Services.AddScoped<ISongsListenDetailsDal, EFSongsListenDetailsDal>();
 
 builder.Services.AddScoped<IMailService, MailManager>();
 

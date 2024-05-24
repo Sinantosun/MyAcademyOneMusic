@@ -13,5 +13,9 @@ namespace OneMusic.DataAccessLayer.Abstract
 
         List<Album> getAlbumListWithArtist();
 
+        int AlbumCount(int id);
+        int AlbumCountByWaiting(int id);
+        string ExpensiveAlbumName(int id);
+
     }
 }

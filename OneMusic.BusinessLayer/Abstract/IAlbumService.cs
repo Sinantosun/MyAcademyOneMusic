@@ -11,6 +11,9 @@ namespace OneMusic.BusinessLayer.Abstract
     {
         List<Album> TgetAlbumByArtist(int id);
         List<Album> TgetAlbumListWithArtist();
+        int TAlbumCount(int id);
+        int TAlbumCountByWaiting(int id);
+        string TExpensiveAlbumName(int id);
 
     }
 }

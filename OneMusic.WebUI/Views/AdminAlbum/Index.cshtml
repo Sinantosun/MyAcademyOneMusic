@@ -10,8 +10,6 @@
 
 <h1>Albümler</h1>
 <br />
-
-
 <table class="table table-hover table-bordered">
     <tr>
         <td>#</td>
@@ -28,16 +26,13 @@
             <td>@count</td>
             <td><img src="@item.CoverImage" style="height:75px; width:75px; " /></td>
             <td>@item.AlbumName</td>
-            <td>@item.AppUserId</td>
+            <td style="text-transform:capitalize">@item.AppUser.Name @item.AppUser.Surname</td>
             <td>@item.Price.ToString("N0") ₺</td>
             <td><button onclick="deleteAlbum(@item.AlbumId)" class="btn btn-outline-danger">Sil</button></td>
-            <td><a asp-action="UpdateAlbum" asp-route-id="@item.AlbumId" class="btn btn-outline-success">Güncelle</a></td>
         </tr>
     }
 </table>
 
-
-<a asp-action="CreateAlbum" class="btn btn-outline-success">Yeni Albüm Ekle</a>
 <br />
 
 <div style="justify-content:center; align-items:center; display:flex">

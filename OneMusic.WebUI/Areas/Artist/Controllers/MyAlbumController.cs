@@ -37,9 +37,11 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             album.AppUserId = user.Id;
+            album.IsVerify = false;
+            album.VerifyDescription = "Onay Aşamasında";
             _albumService.TCreate(album);
 
-            TempData["Result"] = "Tebrikler, Yeni albümünüz oluşturuldu!";
+            TempData["Result"] = "Tebrikler, albümünüz kaydedildi onay işlemleri bittiğinde aktif hesabınıza bildirim alacaksınız";
             TempData["icon"] = "success";
             return RedirectToAction("Index");
         }
