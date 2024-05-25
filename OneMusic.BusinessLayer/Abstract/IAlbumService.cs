@@ -14,6 +14,8 @@ namespace OneMusic.BusinessLayer.Abstract
         int TAlbumCount(int id);
         int TAlbumCountByWaiting(int id);
         string TExpensiveAlbumName(int id);
+        List<Album> TgetAlbumWithArtistByStatusFalseList();
+        List<Album> TgetAlbumWithArtistRejectLists();
 
     }
 }

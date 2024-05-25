@@ -41,6 +41,9 @@ builder.Services.AddScoped<ISongsListenDetailsDal, EFSongsListenDetailsDal>();
 
 builder.Services.AddScoped<IMailService, MailManager>();
 
+builder.Services.AddScoped<IUserNotificationsService, UserNotificationsManager>();
+builder.Services.AddScoped<IUserNotificationsDal, EFUserNotificationsDal>();
+
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

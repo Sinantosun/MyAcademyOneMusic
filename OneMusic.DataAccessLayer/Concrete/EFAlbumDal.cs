@@ -26,7 +26,7 @@ namespace OneMusic.DataAccessLayer.Concrete
 
         public string ExpensiveAlbumName(int id)
         {
-            return _context.Albums.Where(x => x.AppUserId == id && x.Price == _context.Albums.Max(y => y.Price)).Select(t => t.AlbumName).FirstOrDefault();
+            return _context.Albums.Where(x => x.AppUserId == id && x.IsVerify == true && x.Price == _context.Albums.Max(y => y.Price)).Select(t => t.AlbumName).FirstOrDefault();
         }
 
         public List<Album> getAlbumByArtist(int id)
@@ -36,7 +36,16 @@ namespace OneMusic.DataAccessLayer.Concrete
 
         public List<Album> getAlbumListWithArtist()
         {
-            return _context.Albums.Include(x => x.AppUser).ToList();
+            return _context.Albums.Include(x => x.AppUser).Where(x => x.IsVerify == true).ToList();
+        }
+
+        public List<Album> getAlbumWithArtistByStatusFalseList()
+        {
+            return _context.Albums.Include(x => x.AppUser).Where(x => x.IsVerify == false && x.VerifyDescription == "Onay Aşamasında").ToList();
+        }
+        public List<Album> getAlbumWithArtistRejectLists()
+        {
+            return _context.Albums.Include(x => x.AppUser).Where(x => x.IsVerify == false && x.VerifyDescription != "Onay Aşamasında" && x.VerifyDescription != "Onaylandı").ToList();
         }
     }
 }

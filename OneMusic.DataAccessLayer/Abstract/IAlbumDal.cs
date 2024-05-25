@@ -12,6 +12,8 @@ namespace OneMusic.DataAccessLayer.Abstract
         List<Album> getAlbumByArtist(int id);
 
         List<Album> getAlbumListWithArtist();
+        List<Album> getAlbumWithArtistByStatusFalseList();
+        List<Album> getAlbumWithArtistRejectLists();
 
         int AlbumCount(int id);
         int AlbumCountByWaiting(int id);

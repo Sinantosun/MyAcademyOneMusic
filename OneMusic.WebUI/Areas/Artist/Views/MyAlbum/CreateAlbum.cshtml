@@ -1,4 +1,4 @@
-﻿@model Album
+﻿@model CreateAlbumViewModel
 @{
     ViewData["Title"] = "CreateAlbum";
     Layout = "~/Areas/Artist/Views/ArtistLayout/Index.cshtml";
@@ -15,14 +15,13 @@
     <input type="text" asp-for="AlbumName" class="form-control" />
     <span class="text-danger" asp-validation-for="AlbumName"></span>
     <br />
-    @Html.Label("Albüm Görsel")
-    <input type="text" asp-for="CoverImage" class="form-control" />
-    <span class="text-danger" asp-validation-for="CoverImage"></span>
+    @Html.Label("Albüm Görsel")W
+    <input type="file" asp-for="Image" class="form-control" />
+    <span class="text-danger" asp-validation-for="Image"></span>
     <br />
     @Html.Label("Fiyat")
     <input type="text" asp-for="Price" class="form-control" />
     <span class="text-danger" asp-validation-for="Price"></span>
-    <br />
     <br />
     <button class="btn btn-outline-primary">Kaydet</button>
 </form>

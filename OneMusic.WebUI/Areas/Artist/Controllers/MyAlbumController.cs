@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OneMusic.BusinessLayer.Abstract;
 using OneMusic.EntityLayer.Entities;
+using OneMusic.WebUI.ImageSettings;
+using OneMusic.WebUI.Models.AlbumModels;
 
 namespace OneMusic.WebUI.Areas.Artist.Controllers
 {
     [Area("Artist")]
     [Authorize(Roles = "Artist")]
-	[Route("[area]/[controller]/[action]/{id?}")]
-	public class MyAlbumController : Controller
+    [Route("[area]/[controller]/[action]/{id?}")]
+    public class MyAlbumController : Controller
     {
         private readonly IAlbumService _albumService;
         private readonly UserManager<AppUser> _userManager;
@@ -27,23 +30,58 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
             return View(values);
         }
 
-        [HttpGet]
-        public IActionResult CreateAlbum()
+        async Task<List<SelectListItem>> loadDropdown()
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var values = _albumService.TgetAlbumByArtist(user.Id);
+            List<SelectListItem> selectListItems = (from x in values
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = x.AlbumName,
+                                                        Value = x.AlbumId.ToString(),
+                                                    }).ToList();
+            ViewBag.AlbumList = selectListItems;
+            return selectListItems;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateAlbum()
+        {
+            await loadDropdown();
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateAlbum(Album album)
+        public async Task<IActionResult> CreateAlbum(CreateAlbumViewModel album)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            album.AppUserId = user.Id;
-            album.IsVerify = false;
-            album.VerifyDescription = "Onay Aşamasında";
-            _albumService.TCreate(album);
+            if (album.Image != null)
+            {
+                var result = ImageSetting.CreateImage(album.Image, "Albums");
+                _albumService.TCreate(new Album
+                {
+                    AlbumName = album.AlbumName,
+                    AppUserId = user.Id,
+                    IsVerify = false,
+                    VerifyDescription = "Onay Aşamasında",
+                    Price = album.Price,
+                    CoverImage = result,
+                   
+                });
 
-            TempData["Result"] = "Tebrikler, albümünüz kaydedildi onay işlemleri bittiğinde aktif hesabınıza bildirim alacaksınız";
-            TempData["icon"] = "success";
-            return RedirectToAction("Index");
+                TempData["Result"] = "Tebrikler, albümünüz kaydedildi onay işlemleri bittiğinde aktif hesabınıza bildirim alacaksınız";
+                TempData["icon"] = "success";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Result"] = "Görsel Seçiniz";
+                TempData["icon"] = "info";
+
+            }
+            await loadDropdown();
+            return View();
+
+
         }
 
         [HttpGet]

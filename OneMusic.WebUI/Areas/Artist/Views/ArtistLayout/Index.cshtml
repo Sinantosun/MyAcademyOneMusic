@@ -64,6 +64,14 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link" href="/Artist/Notification/Index" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-bell"></i>
+                                </span>
+                                <span class="hide-menu">Bildirimlerim</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link" href="/Login/LogOut" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-lock"></i>
@@ -111,7 +119,7 @@
             toast: true,
             position: "top-end",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 3500,
             timerProgressBar: true,
             didOpen: (toast) => {
                 toast.onmouseenter = Swal.stopTimer;
