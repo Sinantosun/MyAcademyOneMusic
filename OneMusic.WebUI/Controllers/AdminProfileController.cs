@@ -68,46 +68,57 @@ namespace OneMusic.WebUI.Controllers
         {
             ModelState.Clear();
             var values = await _userManager.FindByIdAsync(resultUserViewModel.Id.ToString());
-            values.PhoneNumber = resultUserViewModel.PhoneNumber;
-            values.UserName = resultUserViewModel.UserName;
-            values.Surname = resultUserViewModel.Surname;
-            values.Email = resultUserViewModel.Email;
-            values.Name = resultUserViewModel.Name;
-
-            if (resultUserViewModel.Password != null)
+            var Pwdresult = await _userManager.CheckPasswordAsync(values, resultUserViewModel.OldPassword);
+            if (Pwdresult)
             {
-                if (resultUserViewModel.Password == resultUserViewModel.ConfirmPassword)
+                values.PhoneNumber = resultUserViewModel.PhoneNumber;
+                values.UserName = resultUserViewModel.UserName;
+                values.Surname = resultUserViewModel.Surname;
+                values.Email = resultUserViewModel.Email;
+                values.Name = resultUserViewModel.Name;
+
+                if (resultUserViewModel.Password != null)
                 {
-                    var token = await _userManager.GeneratePasswordResetTokenAsync(values);
-                    var passwordResult = await _userManager.ResetPasswordAsync(values, token.ToString(), resultUserViewModel.Password);
-                    if (!passwordResult.Succeeded)
+                    if (resultUserViewModel.Password == resultUserViewModel.ConfirmPassword)
                     {
-                        foreach (var item in passwordResult.Errors)
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(values);
+                        var passwordResult = await _userManager.ResetPasswordAsync(values, token.ToString(), resultUserViewModel.Password);
+                        if (!passwordResult.Succeeded)
                         {
-                            ViewBag.ResultPassword += item.Description + "<br/>";
+                            foreach (var item in passwordResult.Errors)
+                            {
+                                ViewBag.ResultPassword += item.Description + "<br/>";
+                            }
+                            return View(await LoadUserData());
                         }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Girdiğiniz şifreler eşleşmiyor.");
                         return View(await LoadUserData());
                     }
                 }
-                else
+
+                if (resultUserViewModel.CoverPhoto != null)
                 {
-                    ModelState.AddModelError("Password", "Girdiğiniz şifreler eşleşmiyor.");
-                    return View(await LoadUserData());
+                    var result = ImageSetting.CreateImage(resultUserViewModel.CoverPhoto, "Users/Admins");
+                    ImageSetting.DeleteImage(values.ImageURL);
+                    values.ImageURL = result;
                 }
-            }
 
-            if (resultUserViewModel.CoverPhoto != null)
+
+                await _userManager.UpdateAsync(values);
+                TempData["Result"] = "Profiliniz Güncellendi";
+                TempData["icon"] = "success";
+                return View(await LoadUserData());
+            }
+            else
             {
-                var result = ImageSetting.CreateImage(resultUserViewModel.CoverPhoto, "Users/Admins");
-                ImageSetting.DeleteImage(values.ImageURL);
-                values.ImageURL = result;
+                ModelState.AddModelError("OldPassword", "Mevcut şifreniz hatalı");
+                return View(await LoadUserData());
             }
-
-
-            await _userManager.UpdateAsync(values);
-            TempData["Result"] = "Profiliniz Güncellendi";
-            TempData["icon"] = "success";
-            return View(await LoadUserData());
+         
         }
+       
     }
 }

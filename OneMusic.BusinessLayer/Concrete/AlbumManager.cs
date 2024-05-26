@@ -73,6 +73,16 @@ namespace OneMusic.BusinessLayer.Concrete
             return _albumDal.GetList();
         }
 
+        public List<Album> TgetListAwatingApprovalAlbums()
+        {
+            return _albumDal.getListAwatingApprovalAlbums();
+        }
+
+        public List<Album> TgetRandomAlbumWithArtist()
+        {
+            return _albumDal.getRandomAlbumWithArtist();
+        }
+
         public void TUpdate(Album entity)
         {
             _albumDal.Update(entity);

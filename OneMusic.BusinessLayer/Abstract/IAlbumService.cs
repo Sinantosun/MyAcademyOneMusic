@@ -16,6 +16,8 @@ namespace OneMusic.BusinessLayer.Abstract
         string TExpensiveAlbumName(int id);
         List<Album> TgetAlbumWithArtistByStatusFalseList();
         List<Album> TgetAlbumWithArtistRejectLists();
+        List<Album> TgetListAwatingApprovalAlbums();
+        List<Album> TgetRandomAlbumWithArtist();
 
     }
 }

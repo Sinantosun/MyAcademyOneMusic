@@ -13,12 +13,10 @@ namespace OneMusic.WebUI.Controllers
     public class AdminAlbumVerifyController : Controller
     {
         private readonly IAlbumService _albumService;
-        private readonly IUserNotificationsService _userNotificationsService;
         private readonly UserManager<AppUser> _userManager;
-        public AdminAlbumVerifyController(IAlbumService albumService, IUserNotificationsService userNotificationsService, UserManager<AppUser> userManager)
+        public AdminAlbumVerifyController(IAlbumService albumService, UserManager<AppUser> userManager)
         {
             _albumService = albumService;
-            _userNotificationsService = userNotificationsService;
             _userManager = userManager;
         }
         public IActionResult Index(int pageNumber = 1)
@@ -41,14 +39,6 @@ namespace OneMusic.WebUI.Controllers
             _albumService.TUpdate(value);
             TempData["Result"] = "İşlem Tamamlandı";
             TempData["icon"] = "success";
-            _userNotificationsService.TCreate(new UserNotifications
-            {
-                AppUserId = (int)value.AppUserId,
-                Content = "Merhaba, " + user.Name.ToUpper() + " " + user.Surname.ToUpper() + "<br><br>Başvuruda bulunduğunuz albümünüz onaylanamadı red nedeni aşağıda açıklanmıştır.<br><br> <b>Red Nedeni:</b> " + text,
-                Title = "Albümünüz Reddedildi :(",
-                Date = Convert.ToDateTime(DateTime.Now.ToString("g")),
-
-            });
             return Json(null);
         }
 
@@ -58,18 +48,10 @@ namespace OneMusic.WebUI.Controllers
             var value = _albumService.TGetById(id);
             var user = await _userManager.FindByIdAsync(value.AppUserId.ToString());
             value.IsVerify = true;
-            value.VerifyDescription = "Onaylandı";
+            value.VerifyDescription = "Albümünüz Onaylanmıştır.";
             _albumService.TUpdate(value);
             TempData["Result"] = "İşlem Tamam, Albüm Onaylandı";
             TempData["icon"] = "success";
-            _userNotificationsService.TCreate(new UserNotifications
-            {
-                AppUserId = (int)value.AppUserId,
-                Content = "Albümünüz onaylandı artık şarkılarınızı bu albümünüze ekleyebilirsiniz.",
-                Title = "Tebrikler!",
-                Date = Convert.ToDateTime(DateTime.Now.ToString("g")),
-
-            });
             return RedirectToAction("Index");
         }
 

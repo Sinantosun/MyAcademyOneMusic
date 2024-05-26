@@ -68,7 +68,7 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
                    
                 });
 
-                TempData["Result"] = "Tebrikler, albümünüz kaydedildi onay işlemleri bittiğinde aktif hesabınıza bildirim alacaksınız";
+                TempData["Result"] = "Albümünüz kaydedildi, onay işlemini 'Başvurularım' sekmesinden takip edebilirsiniz";
                 TempData["icon"] = "success";
                 return RedirectToAction("Index");
             }

@@ -427,35 +427,6 @@ namespace OneMusic.DataAccessLayer.Migrations
                     b.ToTable("SongsListenDetails");
                 });
 
-            modelBuilder.Entity("OneMusic.EntityLayer.Entities.UserNotifications", b =>
-                {
-                    b.Property<int>("UserNotificationsID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserNotificationsID"));
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserNotificationsID");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("userNotifications");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("OneMusic.EntityLayer.Entities.AppRole", null)
@@ -544,17 +515,6 @@ namespace OneMusic.DataAccessLayer.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Song");
-                });
-
-            modelBuilder.Entity("OneMusic.EntityLayer.Entities.UserNotifications", b =>
-                {
-                    b.HasOne("OneMusic.EntityLayer.Entities.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("OneMusic.EntityLayer.Entities.Album", b =>

@@ -18,7 +18,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(opts =>
     opts.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders();
 
-builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => { opts.TokenLifespan = TimeSpan.FromMilliseconds(60); });
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => { opts.TokenLifespan = TimeSpan.FromSeconds(60); });
 
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
@@ -41,8 +41,6 @@ builder.Services.AddScoped<ISongsListenDetailsDal, EFSongsListenDetailsDal>();
 
 builder.Services.AddScoped<IMailService, MailManager>();
 
-builder.Services.AddScoped<IUserNotificationsService, UserNotificationsManager>();
-builder.Services.AddScoped<IUserNotificationsDal, EFUserNotificationsDal>();
 
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

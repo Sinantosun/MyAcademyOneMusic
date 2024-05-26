@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OneMusic.BusinessLayer.Abstract;
 using OneMusic.EntityLayer.Entities;
 using OneMusic.WebUI.Areas.Artist.Models;
 using OneMusic.WebUI.ImageSettings;
+using System.Web;
 
 namespace OneMusic.WebUI.Areas.Artist.Controllers
 {
@@ -13,10 +15,11 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
     public class ProfileController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-
-        public ProfileController(UserManager<AppUser> userManager)
+        private readonly IMailService _mailService;
+        public ProfileController(UserManager<AppUser> userManager, IMailService mailService)
         {
             _userManager = userManager;
+            _mailService = mailService;
         }
 
         async Task<EditArtistViewModel> loadUserModel()
@@ -27,7 +30,6 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
             {
                 ArtistId = user.Id,
                 IsEmailConfirmed = user.EmailConfirmed,
-                IsPhoneConfirmed = user.PhoneNumberConfirmed,
                 Email = user.Email,
                 Name = user.Name,
                 PhoneNumber = user.PhoneNumber,
@@ -39,12 +41,26 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
             return model;
         }
 
+        public async Task<IActionResult> SendMailForVerifyMail()
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
 
+            if (user != null)
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                _mailService.sendMail(user.Email, "Mail Doğrulama", $"Merhaba,<br><br>Mailinizi aşağıdaki url üzerinden doğrulayabilirsiniz. <br/ ><a href=\"https://localhost:7238{Url.Action("EmailConfirmed", "Login", new { id = user.Id, token = HttpUtility.UrlEncode(token) })}\">Mailimi Doğrula</a><br><br> One Music");
+
+            }
+            TempData["Result"] = "Mail Onaylama isteği gönderildi";
+            TempData["icon"] = "success";
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await loadUserModel());
         }
+       
         [HttpPost]
         public async Task<IActionResult> Index(EditArtistViewModel model)
         {
@@ -112,8 +128,7 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
                 ModelState.AddModelError("OldPassword", "Mevcut şifreniz hatalı");
             }
             return View(await loadUserModel());
-
-
         }
+
     }
 }

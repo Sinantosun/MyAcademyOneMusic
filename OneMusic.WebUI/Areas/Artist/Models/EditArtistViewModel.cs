@@ -14,6 +14,5 @@
         public string Password { get; set; }
         public string PasswordConfirm { get; set; }
         public bool IsEmailConfirmed { get; set; }
-        public bool IsPhoneConfirmed { get; set; }
     }
 }

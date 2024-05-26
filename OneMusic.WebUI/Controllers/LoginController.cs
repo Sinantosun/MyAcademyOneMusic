@@ -24,8 +24,14 @@ namespace OneMusic.WebUI.Controllers
             _mailService = mailService;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl)
         {
+            ModelState.Clear();
+            if (returnUrl == "1")
+            {
+                ModelState.AddModelError("", "Mail adresiniz güncellendi");
+            }
+   
             return View();
         }
         [HttpPost]
@@ -189,14 +195,14 @@ namespace OneMusic.WebUI.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return Redirect("/Login/Index?returnUrl=1");
                 }
             }
             else
             {
                 return BadRequest();
             }
-           
+
 
         }
 

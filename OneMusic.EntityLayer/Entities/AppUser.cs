@@ -18,6 +18,5 @@ namespace OneMusic.EntityLayer.Entities
 
         public List<SongsListenDetails> SongsListenDetails { get; set; }
 
-        public List<UserNotifications> userNotifications { get; set; }
     }
 }
