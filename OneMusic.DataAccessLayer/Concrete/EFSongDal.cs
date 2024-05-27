@@ -31,6 +31,11 @@ namespace OneMusic.DataAccessLayer.Concrete
             return result;
         }
 
+        public List<Song> getSongsByAlbumID(int id)
+        {
+            return _context.Songs.Include(x => x.Album).ThenInclude(y=>y.AppUser).Where(x => x.AlbumId == id && x.Album.IsVerify == true).ToList();
+        }
+
         public int SongCount(int id)
         {
             return _context.Songs.Where(x => x.Album.AppUserId == id && x.Album.IsVerify == true && x.Album.VerifyDescription == "Onaylandı").Count();

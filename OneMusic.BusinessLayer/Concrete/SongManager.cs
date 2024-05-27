@@ -48,6 +48,11 @@ namespace OneMusic.BusinessLayer.Concrete
             return _songDal.getRandomSingerWithRelationShip();
         }
 
+        public List<Song> TgetSongsByAlbumID(int id)
+        {
+            return _songDal.getSongsByAlbumID(id);
+        }
+
         public int TSongCount(int id)
         {
             return _songDal.SongCount(id);

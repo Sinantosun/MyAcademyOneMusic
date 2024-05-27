@@ -31,7 +31,7 @@ namespace OneMusic.DataAccessLayer.Concrete
 
         public List<Album> getAlbumByArtist(int id)
         {
-            return _context.Albums.Include(y => y.AppUser).Where(x => x.AppUserId == id && x.IsVerify == true).ToList();
+            return _context.Albums.Include(y => y.AppUser).Include(t => t.Songs).Where(x => x.AppUserId == id && x.IsVerify == true).ToList();
         }
 
 
@@ -57,6 +57,11 @@ namespace OneMusic.DataAccessLayer.Concrete
         public List<Album> getRandomAlbumWithArtist()
         {
             return _context.Albums.OrderByDescending(x => Guid.NewGuid()).Include(y => y.AppUser).Where(x => x.IsVerify == true).Take(4).ToList();
+        }
+
+        public Album getAlbumByIDWithAppUser(int id)
+        {
+            return _context.Albums.Include(x => x.AppUser).FirstOrDefault(x => x.IsVerify == true && x.AlbumId == id);
         }
     }
 }

@@ -50,7 +50,6 @@
     <Folder Include="Areas\Artist\Data\" />
     <Folder Include="Areas\Artist\Views\Shared\" />
     <Folder Include="Areas\Default\Data\" />
-    <Folder Include="Areas\Default\Models\" />
     <Folder Include="wwwroot\Images\Albums\" />
     <Folder Include="wwwroot\Images\Banners\" />
     <Folder Include="wwwroot\Images\Artists\" />

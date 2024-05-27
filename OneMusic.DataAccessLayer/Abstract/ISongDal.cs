@@ -14,6 +14,7 @@ namespace OneMusic.DataAccessLayer.Abstract
         int SongCount(int id);
 
         List<Song> ArtistSongsWithAlbum(int id);
+        List<Song> getSongsByAlbumID(int id);
 
 
     }
