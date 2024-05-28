@@ -39,7 +39,7 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
                                             select new SelectListItem
                                             {
                                                 Text = x.Name + " " + x.Surname,
-                                                Value = x.Id.ToString(),
+                                                Value = x.Name + " " + x.Surname,
                                             }).ToList();
             ViewBag.Artitst = Artists;
 
@@ -48,7 +48,7 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
                                                select new SelectListItem
                                                {
                                                    Text = x.CategoryName,
-                                                   Value = x.CategoryID.ToString(),
+                                                   Value = x.CategoryName,
                                                }).ToList();
             ViewBag.Categorys = Categories;
         }
@@ -62,12 +62,37 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
             return View(values);
         }
         [HttpPost]
-        public async Task<IActionResult> Index(int category, int artist)
+        public async Task<IActionResult> Index(string category, string artist)
         {
 
-            var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryID == category && x.AppUserId == artist).ToList().ToPagedList(1, 12);
-            await loadDropdopwn();
-            return View("Index", values);
+
+            //burası mimariye taşınacak
+            if (category != "Tür Seçin" && artist!= "Sanatçı Seçin")
+            {
+                var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryName == category && x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList().ToPagedList(1, 12);
+                await loadDropdopwn();
+                return View("Index", values);
+            }
+            else
+            {
+                if (category != "Tür Seçin")
+                {
+                    var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryName == category).ToList().ToPagedList(1, 12);
+                    await loadDropdopwn();
+                    return View("Index", values);
+                }
+
+                if (artist != "Sanatçı Seçin")
+                {
+                    var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList().ToPagedList(1, 12);
+                    await loadDropdopwn();
+                    return View("Index", values);
+                }
+
+                return View();
+            }
+
+
         }
     }
 }
