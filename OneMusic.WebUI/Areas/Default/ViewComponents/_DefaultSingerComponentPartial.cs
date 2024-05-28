@@ -14,7 +14,8 @@ namespace OneMusic.WebUI.Areas.Default.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View();
+            var value = _songService.TgetRandomSingerWithRelationShip();
+            return View(value);
         }
     }
 }

@@ -21,5 +21,8 @@ namespace OneMusic.EntityLayer.Entities
         public AppUser AppUser { get; set; }
 
         public List<Song> Songs { get; set; }
+
+        public int? CategoryID { get; set; }
+        public Category Category { get; set; }
     }
 }

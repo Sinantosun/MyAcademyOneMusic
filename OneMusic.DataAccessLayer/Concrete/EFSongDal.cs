@@ -21,19 +21,19 @@ namespace OneMusic.DataAccessLayer.Concrete
 
         public List<Song> ArtistSongsWithAlbum(int id)
         {
-            return _context.Songs.Include(x => x.Album).Where(x => x.Album.AppUserId == id).ToList();
+            return _context.Songs.Include(x => x.Album).Where(x => x.Album.AppUserId == id && x.Album.IsVerify == true).ToList();
         }
 
         public List<Song> getRandomSingerWithRelationShip()
         {
 
-            var result = _context.Songs.OrderBy(x => Guid.NewGuid()).Include(x => x.Album).Take(5).ToList();
+            var result = _context.Songs.OrderBy(x => Guid.NewGuid()).Include(x => x.Album).Take(4).ToList();
             return result;
         }
 
         public List<Song> getSongsByAlbumID(int id)
         {
-            return _context.Songs.Include(x => x.Album).ThenInclude(y=>y.AppUser).Where(x => x.AlbumId == id && x.Album.IsVerify == true).ToList();
+            return _context.Songs.Include(x => x.Album).ThenInclude(y => y.AppUser).Where(x => x.AlbumId == id && x.Album.IsVerify == true).ToList();
         }
 
         public int SongCount(int id)

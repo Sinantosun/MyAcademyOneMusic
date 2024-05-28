@@ -10,12 +10,14 @@ using OneMusic.DataAccessLayer.Context;
 using OneMusic.EntityLayer.Entities;
 using OneMusic.WebUI.DAL;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddIdentity<AppUser, AppRole>(opts =>
 {
     opts.User.RequireUniqueEmail = true;
+    opts.User.AllowedUserNameCharacters = "abcçdefghiýjklmnoöpqrsþtuüvwxyzABCÇDEFGHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789._";
 }).AddEntityFrameworkStores<OneMusicContext>().AddErrorDescriber<CustomErrorDescriber>().AddDefaultTokenProviders();
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => { opts.TokenLifespan = TimeSpan.FromSeconds(60); });
@@ -36,6 +38,10 @@ builder.Services.AddScoped<ISongService, SongManager>();
 builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddScoped<IMessageDal, EFMessageDal>();
 
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
+
+
 builder.Services.AddScoped<ISongsListenDetailsService, SongsListenDetailsManager>();
 builder.Services.AddScoped<ISongsListenDetailsDal, EFSongsListenDetailsDal>();
 
@@ -48,8 +54,7 @@ builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<OneMusicContext>();
 
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter()); });
+builder.Services.AddControllersWithViews(opts => { opts.Filters.Add(new AuthorizeFilter()); }).AddJsonOptions(opts => { opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
 builder.Services.ConfigureApplicationCookie(options => { options.LoginPath = "/Login/Index"; options.AccessDeniedPath = "/ErrorPages/Page403"; options.Cookie.Name = Guid.NewGuid().ToString(); options.ExpireTimeSpan = TimeSpan.FromMinutes(1); options.SlidingExpiration = true; options.LogoutPath = "/Login/LogOut/"; });
 var app = builder.Build();
 
