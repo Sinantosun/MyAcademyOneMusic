@@ -20,13 +20,11 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
         private readonly IAlbumService _albumService;
         private readonly ICategoryService _categoryService;
         private readonly UserManager<AppUser> _usermanager;
-        private readonly OneMusicContext _oneMusicContext;
-        public AlbumController(IAlbumService albumService, ICategoryService categoryService, UserManager<AppUser> usermanager, OneMusicContext oneMusicContext)
+        public AlbumController(IAlbumService albumService, ICategoryService categoryService, UserManager<AppUser> usermanager)
         {
             _albumService = albumService;
             _categoryService = categoryService;
             _usermanager = usermanager;
-            _oneMusicContext = oneMusicContext;
         }
 
         async Task loadDropdopwn()
@@ -65,11 +63,10 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
         public async Task<IActionResult> Index(string category, string artist)
         {
 
-
             //burası mimariye taşınacak
-            if (category != "Tür Seçin" && artist!= "Sanatçı Seçin")
+            if (category != "Tür Seçin" && artist != "Sanatçı Seçin")
             {
-                var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryName == category && x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList().ToPagedList(1, 12);
+                var values = _albumService.TgetListAlbumWithCategoryAndArtist(category, artist).ToPagedList(1, 12);
                 await loadDropdopwn();
                 return View("Index", values);
             }
@@ -77,14 +74,14 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
             {
                 if (category != "Tür Seçin")
                 {
-                    var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryName == category).ToList().ToPagedList(1, 12);
+                    var values = _albumService.TgetListAlbumWithCategory(category).ToPagedList(1, 12);
                     await loadDropdopwn();
                     return View("Index", values);
                 }
 
                 if (artist != "Sanatçı Seçin")
                 {
-                    var values = _oneMusicContext.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList().ToPagedList(1, 12);
+                    var values = _albumService.TgetListAlbumWithArtist(artist).ToPagedList(1, 12);
                     await loadDropdopwn();
                     return View("Index", values);
                 }

@@ -63,5 +63,20 @@ namespace OneMusic.DataAccessLayer.Concrete
         {
             return _context.Albums.Include(x => x.AppUser).FirstOrDefault(x => x.IsVerify == true && x.AlbumId == id);
         }
+
+        public List<Album> getListAlbumWithCategoryAndArtist(string category, string artist)
+        {
+            return _context.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryName == category && x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList();
+        }
+
+        public List<Album> getListAlbumWithCategory(string category)
+        {
+            return _context.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.Category.CategoryName == category).ToList();
+        }
+
+        public List<Album> getListAlbumWithArtist(string artist)
+        {
+            return _context.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList();
+        }
     }
 }

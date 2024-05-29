@@ -22,5 +22,11 @@ namespace OneMusic.BusinessLayer.Abstract
         List<Album> TgetListAwatingApprovalAlbums();
         List<Album> TgetRandomAlbumWithArtist();
 
+        List<Album> TgetListAlbumWithCategoryAndArtist(string category, string artist);
+
+        List<Album> TgetListAlbumWithCategory(string category);
+
+        List<Album> TgetListAlbumWithArtist(string artist);
+
     }
 }

@@ -20,7 +20,7 @@ namespace OneMusic.BusinessLayer.Concrete
 
         public int TAlbumCount(int id)
         {
-           return _albumDal.AlbumCount(id);
+            return _albumDal.AlbumCount(id);
         }
 
         public int TAlbumCountByWaiting(int id)
@@ -76,6 +76,21 @@ namespace OneMusic.BusinessLayer.Concrete
         public List<Album> TGetList()
         {
             return _albumDal.GetList();
+        }
+
+        public List<Album> TgetListAlbumWithArtist(string artist)
+        {
+            return _albumDal.getListAlbumWithArtist(artist);
+        }
+
+        public List<Album> TgetListAlbumWithCategory(string category)
+        {
+            return _albumDal.getListAlbumWithCategory(category);
+        }
+
+        public List<Album> TgetListAlbumWithCategoryAndArtist(string category, string artist)
+        {
+            return _albumDal.getListAlbumWithCategoryAndArtist(category, artist);
         }
 
         public List<Album> TgetListAwatingApprovalAlbums()
