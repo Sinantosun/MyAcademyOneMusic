@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OneMusic.BusinessLayer.Abstract;
 
 namespace OneMusic.WebUI.Areas.Default.Controllers
 {
@@ -9,9 +10,17 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
     public class EventController : Controller
     {
 
+        private readonly IEventService _eventService;
+
+        public EventController(IEventService eventService)
+        {
+            _eventService = eventService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var value = _eventService.TGetList();
+            return View(value);
         }
     }
 }

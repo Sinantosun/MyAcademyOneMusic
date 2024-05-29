@@ -11,7 +11,7 @@ namespace OneMusic.BusinessLayer.Concrete
         {
             MimeMessage mimeMessage = new MimeMessage();
 
-            MailboxAddress mailboxAdressFrom = new MailboxAddress("Admin", "aspnetcoreprojeler@gmail.com");
+            MailboxAddress mailboxAdressFrom = new MailboxAddress("Admin", "yourmailadress");
             mimeMessage.From.Add(mailboxAdressFrom);
 
             MailboxAddress mailboxAddressTo = new MailboxAddress("üye", mail);
@@ -25,7 +25,7 @@ namespace OneMusic.BusinessLayer.Concrete
 
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.Connect("smtp.gmail.com", 587, false);
-            smtpClient.Authenticate("aspnetcoreprojeler@gmail.com", "bbjy hwhd ikzd clzk");
+            smtpClient.Authenticate("mailadressess", "pwd");
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
         }

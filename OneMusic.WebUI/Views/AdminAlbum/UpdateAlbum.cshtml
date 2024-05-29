@@ -21,9 +21,6 @@
     <input type="text" asp-for="Price" class="form-control" />
     <span class="text-danger" asp-validation-for="Price"></span>
     <br />
-    @Html.Label("Şarkıcı Seçiniz")
-    @Html.DropDownListFor(x=>x.SingerId,(List<SelectListItem>)ViewBag.SingerList,"Seçiniz",new {@class="form-control"})
-    <span class="text-danger" asp-validation-for="SingerId"></span>
     <br />
     <br />
     <button class="btn btn-outline-primary">Kaydet</button>

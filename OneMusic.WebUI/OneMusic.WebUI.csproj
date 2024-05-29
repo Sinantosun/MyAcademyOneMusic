@@ -50,9 +50,11 @@
     <Folder Include="Areas\Artist\Data\" />
     <Folder Include="Areas\Artist\Views\Shared\" />
     <Folder Include="Areas\Default\Data\" />
+    <Folder Include="Models\ListenDetails\" />
     <Folder Include="wwwroot\Images\Albums\" />
     <Folder Include="wwwroot\Images\Banners\" />
     <Folder Include="wwwroot\Images\Artists\" />
+    <Folder Include="wwwroot\Images\Events\" />
     <Folder Include="wwwroot\Images\Users\Admins\" />
     <Folder Include="wwwroot\Songs\" />
   </ItemGroup>

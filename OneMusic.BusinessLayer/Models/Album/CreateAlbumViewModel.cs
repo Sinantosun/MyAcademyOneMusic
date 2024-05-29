@@ -11,6 +11,7 @@ namespace OneMusic.BusinessLayer.Models.Album
         public decimal Price { get; set; }
 
         public int SingerId { get; set; }
+        public int CategoryID { get; set; }
 
 
         public IFormFile Image { get; set; }

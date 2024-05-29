@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OneMusic.BusinessLayer.Abstract;
+using OneMusic.BusinessLayer.Models.Album;
+using OneMusic.BusinessLayer.ValidationRules;
 using OneMusic.EntityLayer.Entities;
 using OneMusic.WebUI.ImageSettings;
-using OneMusic.WebUI.Models.AlbumModels;
 
 namespace OneMusic.WebUI.Areas.Artist.Controllers
 {
@@ -16,11 +17,13 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
     {
         private readonly IAlbumService _albumService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly ICategoryService _categoryService;
 
-        public MyAlbumController(IAlbumService albumService, UserManager<AppUser> userManager)
+        public MyAlbumController(IAlbumService albumService, UserManager<AppUser> userManager, ICategoryService categoryService)
         {
             _albumService = albumService;
             _userManager = userManager;
+            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -41,6 +44,18 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
                                                         Value = x.AlbumId.ToString(),
                                                     }).ToList();
             ViewBag.AlbumList = selectListItems;
+
+
+            var categoryList = _categoryService.TGetList();
+
+            List<SelectListItem> categories = (from x in categoryList
+                                               select new SelectListItem
+                                               {
+                                                   Text = x.CategoryName,
+                                                   Value = x.CategoryID.ToString(),
+                                               }).ToList();
+            ViewBag.categories = categories;
+
             return selectListItems;
         }
 
@@ -53,9 +68,12 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAlbum(CreateAlbumViewModel album)
         {
+            ModelState.Clear();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (album.Image != null)
             {
+
+
                 var result = ImageSetting.CreateImage(album.Image, "Albums");
                 _albumService.TCreate(new Album
                 {
@@ -65,12 +83,16 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
                     VerifyDescription = "Onay Aşamasında",
                     Price = album.Price,
                     CoverImage = result,
-                   
+                    CategoryID = album.CategoryID
+
+
                 });
 
                 TempData["Result"] = "Albümünüz kaydedildi, onay işlemini 'Başvurularım' sekmesinden takip edebilirsiniz";
                 TempData["icon"] = "success";
                 return RedirectToAction("Index");
+
+
             }
             else
             {
@@ -88,14 +110,35 @@ namespace OneMusic.WebUI.Areas.Artist.Controllers
         public IActionResult UpdateAlbum(int id)
         {
             var values = _albumService.TGetById(id);
-            return View(values);
+
+            UpdateAlbumViewModel updateAlbumViewModel = new UpdateAlbumViewModel()
+            {
+                AlbumId = values.AlbumId,
+                AlbumName = values.AlbumName,
+                AppUserId = values.AppUserId,
+                CoverImage = values.CoverImage,
+                Price = values.Price,
+
+            };
+            return View(updateAlbumViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAlbum(Album album)
+        public ActionResult UpdateAlbum(UpdateAlbumViewModel album)
         {
-            var user = _userManager.FindByNameAsync(User.Identity.Name);
-            album.AppUserId = user.Id;
-            _albumService.TUpdate(album);
+            var value = _albumService.TGetById(album.AlbumId);
+
+            value.AlbumName = album.AlbumName;
+            value.Price = album.Price;
+
+            if (album.Image != null)
+            {
+                var result = ImageSetting.CreateImage(album.Image, "Albums");
+                value.CoverImage = result;
+            }
+
+
+
+            _albumService.TUpdate(value);
             TempData["Result"] = "Albümünüz Güncellendi.";
             TempData["icon"] = "success";
             return RedirectToAction("Index");

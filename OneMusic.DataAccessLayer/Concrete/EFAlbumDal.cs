@@ -37,12 +37,12 @@ namespace OneMusic.DataAccessLayer.Concrete
 
         public List<Album> getAlbumListWithArtist()
         {
-            return _context.Albums.Include(x => x.AppUser).Where(x => x.IsVerify == true).ToList();
+            return _context.Albums.OrderByDescending(x => Guid.NewGuid()).Include(x => x.AppUser).Where(x => x.IsVerify == true).ToList();
         }
 
-        public List<Album> getListAwatingApprovalAlbums()
+        public List<Album> getListAwatingApprovalAlbums(int id)
         {
-            return _context.Albums.Where(x => x.VerifyDescription != "Onaylandı").ToList();
+            return _context.Albums.Where(x => x.VerifyDescription != "Onaylandı" && x.AppUserId == id).ToList();
         }
 
         public List<Album> getAlbumWithArtistByStatusFalseList()
@@ -58,6 +58,7 @@ namespace OneMusic.DataAccessLayer.Concrete
         {
             return _context.Albums.OrderByDescending(x => Guid.NewGuid()).Include(y => y.AppUser).Where(x => x.IsVerify == true).Take(4).ToList();
         }
+
 
         public Album getAlbumByIDWithAppUser(int id)
         {
@@ -78,5 +79,7 @@ namespace OneMusic.DataAccessLayer.Concrete
         {
             return _context.Albums.Include(t => t.AppUser).Include(t => t.Category).Where(x => x.AppUser.Name + " " + x.AppUser.Surname == artist).ToList();
         }
+
+
     }
 }

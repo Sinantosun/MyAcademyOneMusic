@@ -16,6 +16,10 @@ namespace OneMusic.DataAccessLayer.Abstract
         List<Song> ArtistSongsWithAlbum(int id);
         List<Song> getSongsByAlbumID(int id);
 
+        List<Song> getRandomHitAlbumWithRelationShip();
+
+        Song GetRandomBestSong();
+
 
     }
 }

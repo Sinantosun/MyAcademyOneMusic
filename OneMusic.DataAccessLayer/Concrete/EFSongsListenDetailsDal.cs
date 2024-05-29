@@ -26,6 +26,13 @@ namespace OneMusic.DataAccessLayer.Concrete
             return _context.SongsListenDetails.Include(x => x.Song).ThenInclude(y => y.Album).Where(x => x.Song.Album.AppUserId == id).Count();
         }
 
+        public List<SongsListenDetails> getMostListenSingers()
+        {
+            var value = _context.SongsListenDetails.Include(x=>x.AppUser).Include(t=>t.Song).OrderByDescending(x => Guid.NewGuid()).ToList();
+           
+            return value;
+        }
+
         public bool IsActive(int id, int songId)
         {
             var value = _context.SongsListenDetails.FirstOrDefault(x => x.AppUserId == id && x.SongId == songId);

@@ -14,6 +14,9 @@ namespace OneMusic.BusinessLayer.Abstract
         int TSongCount(int id);
         List<Song> TArtistSongsWithAlbum(int id);
         List<Song> TgetSongsByAlbumID(int id);
+        List<Song> TgetRandomHitAlbumWithRelationShip();
+
+        Song TGetRandomBestSong();
     }
 
 }

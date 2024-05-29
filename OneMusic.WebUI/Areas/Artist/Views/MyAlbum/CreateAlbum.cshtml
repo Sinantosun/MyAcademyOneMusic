@@ -15,7 +15,11 @@
     <input type="text" asp-for="AlbumName" class="form-control" />
     <span class="text-danger" asp-validation-for="AlbumName"></span>
     <br />
-    @Html.Label("Albüm Görsel")W
+    @Html.Label("Albüm Kategori Seçiniz")
+    <select asp-for="CategoryID" asp-items="@ViewBag.categories" class="form-control"></select>
+    <span class="text-danger" asp-validation-for="Image"></span>
+    <br />
+    @Html.Label("Albüm Görsel")
     <input type="file" asp-for="Image" class="form-control" />
     <span class="text-danger" asp-validation-for="Image"></span>
     <br />

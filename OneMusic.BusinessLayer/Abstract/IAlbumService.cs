@@ -19,7 +19,7 @@ namespace OneMusic.BusinessLayer.Abstract
 
         List<Album> TgetAlbumWithArtistByStatusFalseList();
         List<Album> TgetAlbumWithArtistRejectLists();
-        List<Album> TgetListAwatingApprovalAlbums();
+        List<Album> TgetListAwatingApprovalAlbums(int id);
         List<Album> TgetRandomAlbumWithArtist();
 
         List<Album> TgetListAlbumWithCategoryAndArtist(string category, string artist);
@@ -27,6 +27,7 @@ namespace OneMusic.BusinessLayer.Abstract
         List<Album> TgetListAlbumWithCategory(string category);
 
         List<Album> TgetListAlbumWithArtist(string artist);
+
 
     }
 }

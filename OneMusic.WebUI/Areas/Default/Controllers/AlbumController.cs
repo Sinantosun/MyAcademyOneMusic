@@ -54,7 +54,7 @@ namespace OneMusic.WebUI.Areas.Default.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int pageNumber = 1)
         {
-            var values = _albumService.TGetList().ToPagedList(pageNumber, 12);
+            var values = _albumService.TgetAlbumListWithArtist().ToPagedList(pageNumber, 12);
             await loadDropdopwn();
 
             return View(values);

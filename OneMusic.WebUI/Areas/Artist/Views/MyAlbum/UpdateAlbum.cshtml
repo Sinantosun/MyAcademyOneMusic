@@ -1,4 +1,4 @@
-﻿@model Album
+﻿@model OneMusic.BusinessLayer.Models.Album.UpdateAlbumViewModel
 @{
     ViewData["Title"] = "UpdateAlbum";
     Layout = "~/Areas/Artist/Views/ArtistLayout/Index.cshtml";
@@ -16,8 +16,8 @@
     <span class="text-danger" asp-validation-for="AlbumName"></span>
     <br />
     @Html.Label("Albüm Görsel")
-    <input type="text" asp-for="CoverImage" class="form-control" />
-    <span class="text-danger" asp-validation-for="CoverImage"></span>
+    <input type="file" asp-for="Image" class="form-control" />
+    <span class="text-danger" asp-validation-for="Image"></span>
     <br />
     @Html.Label("Fiyat")
     <input type="text" asp-for="Price" class="form-control" />

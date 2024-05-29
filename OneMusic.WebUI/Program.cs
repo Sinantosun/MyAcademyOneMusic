@@ -45,6 +45,11 @@ builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
 builder.Services.AddScoped<ISongsListenDetailsService, SongsListenDetailsManager>();
 builder.Services.AddScoped<ISongsListenDetailsDal, EFSongsListenDetailsDal>();
 
+
+
+builder.Services.AddScoped<IEventService, EventManager>();
+builder.Services.AddScoped<IEventDal, EFEventDal>();
+
 builder.Services.AddScoped<IMailService, MailManager>();
 
 

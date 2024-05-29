@@ -93,15 +93,16 @@ namespace OneMusic.BusinessLayer.Concrete
             return _albumDal.getListAlbumWithCategoryAndArtist(category, artist);
         }
 
-        public List<Album> TgetListAwatingApprovalAlbums()
+        public List<Album> TgetListAwatingApprovalAlbums(int id)
         {
-            return _albumDal.getListAwatingApprovalAlbums();
+            return _albumDal.getListAwatingApprovalAlbums(id);
         }
 
         public List<Album> TgetRandomAlbumWithArtist()
         {
             return _albumDal.getRandomAlbumWithArtist();
         }
+
 
         public void TUpdate(Album entity)
         {

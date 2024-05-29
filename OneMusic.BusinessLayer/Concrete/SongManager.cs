@@ -43,6 +43,16 @@ namespace OneMusic.BusinessLayer.Concrete
             return _songDal.GetList();
         }
 
+        public Song TGetRandomBestSong()
+        {
+            return _songDal.GetRandomBestSong();
+        }
+
+        public List<Song> TgetRandomHitAlbumWithRelationShip()
+        {
+            return _songDal.getRandomHitAlbumWithRelationShip();
+        }
+
         public List<Song> TgetRandomSingerWithRelationShip()
         {
             return _songDal.getRandomSingerWithRelationShip();

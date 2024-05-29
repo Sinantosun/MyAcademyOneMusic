@@ -44,6 +44,11 @@ namespace OneMusic.BusinessLayer.Concrete
             return _songsListenDetailsDal.GetList();
         }
 
+        public List<SongsListenDetails> TgetMostListenSingers()
+        {
+            return _songsListenDetailsDal.getMostListenSingers();
+        }
+
         public bool TIsActive(int id, int songId)
         {
            return _songsListenDetailsDal.IsActive(id, songId);

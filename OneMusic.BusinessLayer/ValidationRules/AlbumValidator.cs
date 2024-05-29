@@ -8,7 +8,6 @@ namespace OneMusic.BusinessLayer.ValidationRules
         public AlbumValidator()
         {
             RuleFor(x => x.AlbumName).NotEmpty().WithMessage("Albüm adı boş bırakılamaz");
-            RuleFor(x => x.SingerId).Must(IsZeroInt).WithMessage("Şarkıcı seçiniz burası tamamen validasyona bağğlu calişiyor");
             RuleFor(x => x.Price).Must(IsZeroDecimal).WithMessage("Albüm fiyatı 0'dan büyük olmalıdır");
             RuleFor(x => x.Image.FileName).Must(CheckExtension).WithMessage("Seçtiğiniz dosya uzantısı desteklenmiyor lütfen görsel uzantılarından (.jpg - .png - .jpeg) birini seçin.");
 

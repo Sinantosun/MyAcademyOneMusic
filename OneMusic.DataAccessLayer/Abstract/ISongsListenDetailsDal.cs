@@ -1,4 +1,5 @@
-﻿using OneMusic.EntityLayer.Entities;
+﻿using OneMusic.DataAccessLayer.Models;
+using OneMusic.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace OneMusic.DataAccessLayer.Abstract
         int countByListenedArtist(int id);
 
         bool IsActive(int id,int songId);
+
+
+        List<SongsListenDetails> getMostListenSingers();
 
     }
 }
