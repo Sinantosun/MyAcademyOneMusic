@@ -76,3 +76,35 @@ Bu kısımların tamamı veri tabanında bulunan kayıtlardan random listeleniyo
 ![Image08](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/bb77ecf5-bb45-4116-a6b1-cb33bfaa10ca)
 Admin tarafından eklenen etkinlikler burada listeleniyor.
 
+<h1>Sanatçı Paneli</h1>
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/a3ee85cb-1143-4eca-a8a1-8d579e8f82d4)
+
+Her sanatçı burada ilgili bilgileri görüntüleyebilmektedir.
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/5f5584bc-1934-478b-81a6-03fd95da7a84)
+
+Bu kısım albüm ekleme sayfasıdır sanatçılar ilgili alanları doldurup başvurda bulunyorlar daha sonra admin tarafindan onay ve red işlemlerini tabi tutuluyor eğer onaylanırsa sitei içinde albüm görüntüleniyor.
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/b5ae93af-779b-4cd2-94b9-fa99987543b3)
+
+Bu kısım sanatçı kendiyle alakalı bütün bilgileri güncelleyebilmektedir. Burada güvenli olabilmesi açısından mevcut şifreye göre işlem yapılmaktadır eğer şifre yanlış ise işlem yapılmamaktadır.
+
+<h1>Admin Paneli</h1>
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/966d9e97-262a-49d8-8780-929c8bf5654a)
+
+Sanatçıların başvuruda bulunduğu albümler burada görünür red ve onay işlemleri burada gerçekleşir onay işleminde direkt onaylama sağlanır red işleminde bir popup ekran açılıp red nedeni sorulur neden yazıldıktan sonra red işlemi sağlanır.
+
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/2fca9aba-3468-4543-a0f8-6b36ede5bc96)
+
+Bu kısım ilk bilgilendirmedir evet butonuna basılırsa aşağıdaki görseldeki gibi bir popup ekran açılacaktır
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/ae267ffc-2772-46a5-ac82-437943c0b013)
+
+evet butonuna basıldığında açılan red nedeni yazma ekranı
+
+
+
+
