@@ -44,8 +44,10 @@ Projenin albüm detay görüntüleme sayfasında ile ilgili albümün şarkı s�
  → En basit tabir ile sayfalamadır yani verilerin belli her sayfada istenilen adet olarak gösterilmesi kalanların ise hemen verilerin altında oluşan butonlar yardımıyla (1-2-3-4...sayfa sonu) erişilmesidir.
 
 <h1>Proje Görselleri </h1> <br>
- Albümlerin Listesi <br>
- ![Image07](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/d7238138-70c4-4695-b610-08ea81cb6048)
+ Albümlerin Listesi 
+ 
+ ![Image07](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/818cf554-220e-4eca-8bc0-d7df3b83b70b)
+
 Burada tutuluyor yukarıda bahsettimiz x.pagedlist burada kullanılmıştır her sayfada 12 kayıt olmak şartıyla altlarda bulunan numaralar ile sayfalar arası geçiş sağlanıyor.
  
 
