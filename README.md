@@ -44,16 +44,16 @@ Projenin albüm detay görüntüleme sayfasında ile ilgili albümün şarkı s�
  → En basit tabir ile sayfalamadır yani verilerin belli her sayfada istenilen adet olarak gösterilmesi kalanların ise hemen verilerin altında oluşan butonlar yardımıyla (1-2-3-4...sayfa sonu) erişilmesidir.
 
 <h1>Proje Görselleri </h1> <br>
- Albümlerin Listesi 
+ Albümlerin Listesi <br>
  ![Image07](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/d7238138-70c4-4695-b610-08ea81cb6048)
 Burada tutuluyor yukarıda bahsettimiz x.pagedlist burada kullanılmıştır her sayfada 12 kayıt olmak şartıyla altlarda bulunan numaralar ile sayfalar arası geçiş sağlanıyor.
  
 
- Albüm Detay Sayfası 
+ Albüm Detay Sayfası  <br>
 ![Img01](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/50751832-56aa-483b-b7c0-7bf84946a0dc)
 Burada rapid api ile şarkı sözleri albüm adına göre çekilmiştir.
 
- Ana Sayfa Carsouel alanı
+ Ana Sayfa Carsouel alanı <br>
 ![Image02](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/0b4dea6e-fea5-4f01-9693-b3b8a9e1a1e8)
 burada admin tarafindan kayıt edilen veriler işlenmektedir.
 
