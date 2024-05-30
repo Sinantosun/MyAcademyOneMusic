@@ -103,7 +103,24 @@ Bu kısım ilk bilgilendirmedir evet butonuna basılırsa aşağıdaki görselde
 
 ![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/ae267ffc-2772-46a5-ac82-437943c0b013)
 
-evet butonuna basıldığında açılan red nedeni yazma ekranı
+evet butonuna basıldığında açılan red nedeni yazma ekranı bu şekilde red işlemi tamamlanır.
+
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/561472a6-0356-40df-9b0d-d798889e9b95)
+
+rol ekleme silme güncelleme işlemleri buradan yapılır
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/7dbc9978-9f5d-4db9-9b03-1507c1030423)
+
+Rol atanacak kullanıcı bu liste içersinden seçilir.
+
+![image](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/5b71e0ab-9899-468a-9257-e21ca179668d)
+
+kullanıcı seçildikten sonra aktif bulunduğu roller direk olarak işaretli olarak gelir istenilen rol atandıktan sonra işlem tamamlanır.
+
+
+
+
 
 
 
