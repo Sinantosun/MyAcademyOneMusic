@@ -21,15 +21,15 @@ Projenin albüm detay görüntüleme sayfasında ile ilgili albümün şarkı s�
  → LINQ
 
  Teknik Özellikler;
-→ İki panel içinde oturum 5 dakika işlem yapılmadığı sürece oturumun otomatik düşürülmesi (session time out)
-→ Identity Kütüphanesi ile mail onaylama işlemleri şifre sıfırlama işlemleri         
+→ İki panel içinde oturum 5 dakika işlem yapılmadığı sürece oturumun otomatik düşürülmesi (session time out)<br>
+→ Identity Kütüphanesi ile mail onaylama işlemleri şifre sıfırlama işlemleri         <br>
 → N Katmanlı Mimari
 
 <h1>İdentity Kütüphanesi Nedir ?</h1>
- → Identity Microsoft tarafından geliştirilen ve üyelik sistemi inşa etmek amacıyla kullanılan bir kütüphanedir. 
- → Hazır gelen ve özelleştirilebilen bir yapıdadır
- → Hazır gelenden kastım burada Varsayılan olarak kullanıcı tablosu rol tablosu ve bununla ilişkili bir çok tablo içinde barındırmaktadır isteğe göre bu tablolara sütün eklenebilir.
- → Şifrelerin Hashlenmesi, İki adımlı doğrulama, Kullanıcıların 5 defa hatalı girişlerinde oturum kitlenmesi gibi özellikleride barındırır.
+ → Identity Microsoft tarafından geliştirilen ve üyelik sistemi inşa etmek amacıyla kullanılan bir kütüphanedir. <br>
+ → Hazır gelen ve özelleştirilebilen bir yapıdadır <br>
+ → Hazır gelenden kastım burada Varsayılan olarak kullanıcı tablosu rol tablosu ve bununla ilişkili bir çok tablo içinde barındırmaktadır isteğe göre bu tablolara sütün eklenebilir.<br>
+ → Şifrelerin Hashlenmesi, İki adımlı doğrulama, Kullanıcıların 5 defa hatalı girişlerinde oturum kitlenmesi gibi özellikleride barındırır.<br>
 
 <h1>Rapid Api Nedir ?</h1>
 
