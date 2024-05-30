@@ -8,19 +8,19 @@ Projenin albüm detay görüntüleme sayfasında ile ilgili albümün şarkı s�
 
  Teknolojiler
 
- → Identity Kütüphanesi
- → Entity Framework Code First
- → ASP.NET Core 8.0
- → Fluent Validation
- → HTML, CSS, Bootstrap
- → MSSQL Server
- → X.PagedList ile sayfalama
- → Ajax
- → Rapid Api Song Lycris
- → Sweet Alert
- → LINQ
+ → Identity Kütüphanesi <br>
+ → Entity Framework Code First <br>
+ → ASP.NET Core 8.0 <br>
+ → Fluent Validation <br>
+ → HTML, CSS, Bootstrap <br> 
+ → MSSQL Server <br>
+ → X.PagedList ile sayfalama <br>
+ → Ajax <br>
+ → Rapid Api Song Lycris <br>
+ → Sweet Alert <br>
+ → LINQ <br>
 
- Teknik Özellikler;
+ Teknik Özellikler;<br>
 → İki panel içinde oturum 5 dakika işlem yapılmadığı sürece oturumun otomatik düşürülmesi (session time out)<br>
 → Identity Kütüphanesi ile mail onaylama işlemleri şifre sıfırlama işlemleri         <br>
 → N Katmanlı Mimari
