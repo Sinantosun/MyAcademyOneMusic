@@ -51,7 +51,8 @@ Burada tutuluyor yukarıda bahsettimiz x.pagedlist burada kullanılmıştır her
 
  Albüm Detay Sayfası  <br>
 
-![Img01](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/50751832-56aa-483b-b7c0-7bf84946a0dc)
+![Image07](https://github.com/Sinantosun/MyAcademyOneMusic/assets/145317724/4de47ef2-e3a3-4e26-a619-3919de485853)
+
 
 Burada rapid api ile şarkı sözleri albüm adına göre çekilmiştir.
 
